@@ -8,8 +8,8 @@ import Footer from '../components//Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'CarFinder - Find Your Perfect Car',
-  description: 'Discover the perfect car for your needs and budget with CarFinder',
+  title: 'Newdream Car - Find Your Perfect Car',
+  description: 'Discover the perfect car for your needs and budget with Newdream Car',
 };
 
 export default function RootLayout({
