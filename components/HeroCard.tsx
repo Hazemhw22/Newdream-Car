@@ -13,10 +13,10 @@ type CarCardProps = {
 export default function CarCard({ title, description, imageUrl, isActive }: CarCardProps) {
   return (
     <motion.div
-      className={`bg-white rounded-2xl shadow-md overflow-hidden w-72 transition-all duration-300 ${
+      className={`bg-white rounded-2xl shadow-md overflow-hidden w-full transition-all duration-300 ${
         isActive ? "scale-105 z-10" : "scale-95 opacity-70"
       }`}
-      animate={isActive ? { scale: 1.1, y: -10 } : { scale: 1, y: 0 }}
+      animate={isActive ? { scale: 1.05, y: -8 } : { scale: 1, y: 0 }}
     >
       <Image
         src={imageUrl}

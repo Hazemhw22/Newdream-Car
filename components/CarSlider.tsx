@@ -2,8 +2,8 @@
 'use client';
 import CarCard from "@/components/HeroCard";
 import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useSwipeable } from "react-swipeable";
+
 const cars = [
   {
     title: "Chery FX EV",
@@ -30,32 +30,36 @@ const cars = [
 export default function CarSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + cars.length) % cars.length);
+  const handleSwipe = (direction: "LEFT" | "RIGHT") => {
+    if (direction === "LEFT") {
+      setActiveIndex((prev) => (prev + 1) % cars.length);
+    } else {
+      setActiveIndex((prev) => (prev - 1 + cars.length) % cars.length);
+    }
   };
 
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % cars.length);
-  };
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => handleSwipe("LEFT"),
+    onSwipedRight: () => handleSwipe("RIGHT"),
+    preventScrollOnSwipe: true,
+    trackMouse: true,
+  });
 
   return (
-    <section className="py-12 bg-gray-50 text-center">
+    <section className="py-12 bg-gray-50 text-center px-4">
       <h2 className="text-2xl font-bold mb-6">🔥 Hot Car Deals</h2>
-      <div className="flex items-center justify-center gap-4">
-        <Button variant="ghost" onClick={handlePrev}>
-          <ChevronLeft className="w-6 h-6" />
-        </Button>
 
-        <div className="flex gap-6 transition-all duration-300">
-          {cars.map((car, idx) => (
-            <CarCard key={idx} {...car} isActive={idx === activeIndex} />
-          ))}
+      <div {...swipeHandlers} className="flex justify-center">
+        <div className="w-full max-w-md">
+          {cars.map((car, idx) =>
+            idx === activeIndex ? (
+              <CarCard key={idx} {...car} isActive={true} />
+            ) : null
+          )}
         </div>
-
-        <Button variant="ghost" onClick={handleNext}>
-          <ChevronRight className="w-6 h-6" />
-        </Button>
       </div>
+
+      <p className="text-sm text-gray-500 mt-4">Swipe left or right</p>
     </section>
   );
 }
