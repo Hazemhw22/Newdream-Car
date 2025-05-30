@@ -1,0 +1,36 @@
+'use client';
+
+import React from 'react';
+import { Car, Truck, Zap, CircleDot } from 'lucide-react';
+
+const carTypes = [
+  { name: 'EV', icon: Zap },
+  { name: 'SUV', icon: Car },
+  { name: 'Truck', icon: Truck },
+  { name: 'Sedan', icon: Car },
+  { name: 'Hybrid', icon: CircleDot },
+];
+
+export default function CarTypes() {
+  return (
+    <div className="mb-12">
+      <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100">Research By Type</h2>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        {carTypes.map((type) => {
+          const Icon = type.icon;
+          return (
+            <button
+              key={type.name}
+              className="flex flex-col items-center justify-center p-6 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            >
+              <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-3">
+                <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              </div>
+              <span className="text-gray-900 dark:text-gray-100 font-medium">{type.name}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
