@@ -125,6 +125,27 @@ export default function Header() {
             >
               About Us
             </Link>
+
+            {/* Dark Mode Toggle for Mobile */}
+            <div className="flex items-center justify-center mt-4 mb-2">
+              <button
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                className="flex items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              >
+                {theme === 'dark' ? (
+                  <>
+                    <Sun className="h-5 w-5 mr-2 text-foreground" />
+                    <span>Light Mode</span>
+                  </>
+                ) : (
+                  <>
+                    <Moon className="h-5 w-5 mr-2 text-foreground" />
+                    <span>Dark Mode</span>
+                  </>
+                )}
+              </button>
+            </div>
+
             <div className="pt-4">
               <Button className="w-full bg-gradient-to-r from-[#00D1C1] to-[#0088F8] text-white">
                 Sign In
