@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Heart, Menu, X, Sun, Moon, MapPin } from 'lucide-react';
 import { cn } from '../lib/utils';
-import { Button } from '../components/ui/button';
 import { useTheme } from 'next-themes';
 
 export default function Header() {
@@ -146,11 +145,6 @@ export default function Header() {
               </button>
             </div>
 
-            <div className="pt-4">
-              <Button className="w-full bg-gradient-to-r from-[#00D1C1] to-[#0088F8] text-white">
-                Sign In
-              </Button>
-            </div>
           </div>
         </div>
       )}
