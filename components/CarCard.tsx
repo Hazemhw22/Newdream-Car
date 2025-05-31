@@ -38,7 +38,7 @@ export default function CarCard({ car }: CarCardProps) {
 
   return (
     <>
-      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 relative max-w-md sm:max-w-lg lg:max-w-2xl mx-auto">
+<div className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 relative max-w-md sm:max-w-lg lg:max-w-2xl mx-auto border border-gray-300 dark:border-gray-700">
         {/* Header Tags */}
         <div className="absolute top-4 left-4 z-10 flex flex-col gap-2 text-xs sm:text-sm">
           {car.isBestChoice && (
