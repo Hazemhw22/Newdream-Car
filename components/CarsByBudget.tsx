@@ -73,9 +73,9 @@ export default function CarsByBudget() {
       {/* View All Link */}
       <div className="mt-8 text-center">
         <Button variant="outline" className="group dark:border-gray-600 dark:text-white">
-          View All {activeRange === 'under10' ? 'Cars Under 10 Lakh' : 
-            activeRange === '10to20' ? 'Cars Between 10-20 Lakh' : 
-            activeRange === '20to30' ? 'Cars Between 20-30 Lakh' : 'Luxury Cars'}
+          View All {activeRange === 'under10' ? 'Cars Under 10 IL' : 
+            activeRange === '10to20' ? 'Cars Between 10-20 IL' : 
+            activeRange === '20to30' ? 'Cars Between 20-30 IL' : 'Luxury Cars'}
           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </Button>
       </div>
