@@ -67,7 +67,7 @@ export default function NewCars() {
       image: '/2022-Mercedes-Benz-C-Class-White.png',
       features: ['Feature 1', 'Feature 2'],
       isHybrid: Math.random() > 0.5,
-       year: 2023,
+       year: 2025,
        mileage:6000
     }))
   ];

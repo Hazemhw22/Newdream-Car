@@ -39,20 +39,28 @@ export default function CarCard({ car }: CarCardProps) {
   return (
     <>
 <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 relative max-w-md sm:max-w-lg lg:max-w-4xl w-full mx-auto border border-gray-300 dark:border-gray-700">
-        {/* Header Tags */}
-        <div className="absolute top-4 left-4 z-10 flex flex-col gap-2 text-xs sm:text-sm">
-          {car.isBestChoice && (
-            <div className="bg-yellow-400 text-black px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
-              <Star className="h-4 w-4 fill-current" />
-              Best Choice
+       {/* Header Tags */}
+            <div className="absolute top-4 left-4 z-10 flex flex-col gap-2 text-xs sm:text-sm">
+            {car.year === 2025 && (
+                <div className="bg-green-500 text-white px-2 py-0.5 rounded-full font-bold w-fit">
+                NEW
+                </div>
+            )}
+
+            {car.isBestChoice && (
+                <div className="bg-yellow-400 text-black px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
+                <Star className="h-4 w-4 fill-current" />
+                Best Choice
+                </div>
+            )}
+
+            {car.award && (
+                <div className="bg-yellow-100 border-2 border-yellow-400 px-2 py-1 rounded text-xs font-bold text-center text-gray-900 dark:text-gray-900">
+                Car of<br />the Year<br />2025
+                </div>
+            )}
             </div>
-          )}
-          {car.award && (
-            <div className="bg-yellow-100 border-2 border-yellow-400 px-2 py-1 rounded text-xs font-bold text-center text-gray-900 dark:text-gray-900">
-              Car of<br />the Year<br />2025
-            </div>
-          )}
-        </div>
+
 
         {/* Heart Button */}
         <button

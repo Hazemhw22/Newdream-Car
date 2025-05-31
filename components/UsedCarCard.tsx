@@ -37,9 +37,9 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
       <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 relative max-w-md sm:max-w-lg lg:max-w-4xl w-full mx-auto border border-gray-300 dark:border-gray-700">
 
         {/* Used Tag */}
-        <div className="absolute top-4 left-4 z-10">
-          <div className="bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold shadow-md">
-            Used
+        <div className="absolute top-4 left-4 z-10 flex flex-col gap-2 text-xs sm:text-sm">
+          <div className="bg-yellow-500 text-white px-2 py-0.5 rounded-full font-bold w-fit">
+            USED
           </div>
         </div>
 
