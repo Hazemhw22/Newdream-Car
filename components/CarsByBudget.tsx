@@ -64,7 +64,7 @@ export default function CarsByBudget() {
             name={car.name}
             brand={car.brand}
             image={car.image}
-            price={`${car.priceRange.min.toFixed(2)} - ${car.priceRange.max.toFixed(2)} IL`}
+            price={`${car.priceRange.min.toFixed(2)}K - ${car.priceRange.max.toFixed(2)}K IL`}
             link={`/cars/${car.id}`}
           />
         ))}
