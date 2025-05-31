@@ -8,17 +8,20 @@ import ContactModal from './ContactModal';
 
 interface CarCardProps {
   car: {
-    id: number;
-    name: string;
-    brand: string;
-    price: number;
-    originalPrice?: number;
-    image: string;
-    features: string[];
-    isHybrid?: boolean;
-    award?: string;
-    isBestChoice?: boolean;
-  };
+  id: number;
+  name: string;
+  brand: string;
+  price: number;
+  originalPrice?: number;
+  image: string;
+  features: string[];
+  isHybrid?: boolean;
+  award?: string;
+  isBestChoice?: boolean;
+  year?: number;           
+  mileage?: number;        
+}
+;
 }
 
 export default function CarCard({ car }: CarCardProps) {
@@ -35,7 +38,7 @@ export default function CarCard({ car }: CarCardProps) {
 
   return (
     <>
-      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 relative max-w-md mx-auto">
+      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 relative max-w-md sm:max-w-lg lg:max-w-2xl mx-auto">
         {/* Header Tags */}
         <div className="absolute top-4 left-4 z-10 flex flex-col gap-2 text-xs sm:text-sm">
           {car.isBestChoice && (
@@ -61,13 +64,13 @@ export default function CarCard({ car }: CarCardProps) {
         </button>
 
         {/* Car Image */}
-        <div className="relative h-40 sm:h-48 bg-gray-100 dark:bg-gray-700">
+        <div className="relative h-40 sm:h-48 lg:h-64 bg-gray-100 dark:bg-gray-700">
           <Image
             src={car.image}
             alt={car.name}
             fill
             style={{ objectFit: 'cover' }}
-            sizes="(max-width: 768px) 100vw, 33vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>
 
@@ -135,11 +138,16 @@ export default function CarCard({ car }: CarCardProps) {
         </div>
       </div>
 
-      <ContactModal 
-        isOpen={showContactModal}
-        onClose={() => setShowContactModal(false)}
-        carName={car.name}
-      />
+     <ContactModal
+            isOpen={showContactModal}
+            onClose={() => setShowContactModal(false)}
+            carName={car.name}
+            carImage={car.image}
+            carPrice={car.price}
+            mileage={car.mileage}
+            year={car.year}
+     />
+
     </>
   );
 }

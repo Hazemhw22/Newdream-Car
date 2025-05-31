@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import SearchFilters from '../../components/SearchFilters';
@@ -11,7 +11,6 @@ export default function NewCars() {
   const [sortBy, setSortBy] = useState('price-low');
   const [displayedCars, setDisplayedCars] = useState(12);
 
-  // Mock data - in real app this would come from API
   const allCars = [
     {
       id: 1,
@@ -33,7 +32,9 @@ export default function NewCars() {
       image: '/427770636_1718097302720.png',
       features: ['Seven seats with full multimedia', 'Safety technologies'],
       isHybrid: true,
-      isBestChoice: true
+      isBestChoice: true,
+       year: 2022,
+    mileage: 46000
     },
     {
       id: 3,
@@ -42,7 +43,9 @@ export default function NewCars() {
       price: 139990,
       image: '/pngimg.com - bmw_PNG99558.png',
       features: ['Suitable vehicle ', 'needs six months usage'],
-      award: 'NBC Car of the Year 2025'
+      award: 'NBC Car of the Year 2025',
+       year: 2020,
+    mileage: 72000
     },
     {
       id: 4,
@@ -52,9 +55,10 @@ export default function NewCars() {
       originalPrice: 241930,
       image: '/STAM-TOYOTA-LAND-CRUISER-2022.png',
       features: ['Suitable vehicle - needs six months usage'],
-      isBestChoice: true
+      isBestChoice: true,
+      year: 2021,
+      mileage: 58000
     },
-    // Add more mock cars
     ...Array.from({ length: 20 }, (_, i) => ({
       id: i + 5,
       name: `Car Model ${i + 5}`,
@@ -62,11 +66,12 @@ export default function NewCars() {
       price: Math.floor(Math.random() * 150000) + 100000,
       image: '/2022-Mercedes-Benz-C-Class-White.png',
       features: ['Feature 1', 'Feature 2'],
-      isHybrid: Math.random() > 0.5
+      isHybrid: Math.random() > 0.5,
+       year: 2023,
+       mileage:6000
     }))
   ];
 
-  // Filter and sort cars
   const filteredCars = allCars
     .filter(car => {
       if (searchTerm && !car.name.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -106,10 +111,10 @@ export default function NewCars() {
     setDisplayedCars(12);
   }, [searchTerm, brand, priceRange, sortBy]);
 
- return (
+  return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
-      
+
       <main className="pt-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Page Header */}
@@ -131,14 +136,14 @@ export default function NewCars() {
           />
 
           {/* Results Count */}
-          <div className="mb-6">
+          <div className="mb-4 mt-2">
             <p className="text-gray-600 dark:text-gray-400">
               Showing {visibleCars.length} of {filteredCars.length} cars
             </p>
           </div>
 
           {/* Cars Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3">
             {visibleCars.map(car => (
               <CarCard key={car.id} car={car} />
             ))}
