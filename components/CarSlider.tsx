@@ -1,5 +1,5 @@
-// components/CarSlider.tsx
 'use client';
+
 import CarCard from "@/components/HeroCard";
 import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
@@ -46,8 +46,10 @@ export default function CarSlider() {
   });
 
   return (
-    <section className="py-12 bg-gray-50 text-center px-4">
-      <h2 className="text-2xl font-bold mb-6">🔥 Hot Car Deals</h2>
+    <section className="py-12 px-4 text-center bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">
+        🔥 Hot Car Deals
+      </h2>
 
       <div {...swipeHandlers} className="flex justify-center">
         <div className="w-full max-w-md">
@@ -59,7 +61,9 @@ export default function CarSlider() {
         </div>
       </div>
 
-      <p className="text-sm text-gray-500 mt-4">Swipe left or right</p>
+      <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
+        Swipe left or right
+      </p>
     </section>
   );
 }

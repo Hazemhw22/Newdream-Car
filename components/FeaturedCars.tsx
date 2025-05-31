@@ -17,16 +17,15 @@ export default function FeaturedCars() {
   };
 
   return (
-    <section className="py-10">
-      
-      <div className="flex justify-between items-center mb-6">
+    <section className="py-10 bg-white dark:bg-gray-900 transition-colors duration-300">
+      <div className="flex justify-between items-center mb-6 px-4 sm:px-0">
         <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Featured Cars</h2>
         <div className="flex gap-2">
           <Button 
             variant="outline" 
             size="icon"
             onClick={() => scroll('left')}
-            className="rounded-full"
+            className="rounded-full dark:border-gray-600 dark:text-white dark:hover:bg-gray-800"
           >
             <ChevronLeft className="h-5 w-5" />
           </Button>
@@ -34,7 +33,7 @@ export default function FeaturedCars() {
             variant="outline" 
             size="icon"
             onClick={() => scroll('right')}
-            className="rounded-full"
+            className="rounded-full dark:border-gray-600 dark:text-white dark:hover:bg-gray-800"
           >
             <ChevronRight className="h-5 w-5" />
           </Button>
@@ -83,7 +82,7 @@ interface FeaturedCardProps {
 
 function FeaturedCard({ title, subtitle, image, color }: FeaturedCardProps) {
   return (
-    <div className="flex-shrink-0 w-full sm:w-[350px] md:w-[400px] h-[240px] rounded-xl overflow-hidden relative group">
+    <div className="flex-shrink-0 w-full sm:w-[350px] md:w-[400px] h-[240px] rounded-xl overflow-hidden relative group shadow-md dark:shadow-lg">
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent z-10"></div>
       
       {/* Background Image */}
@@ -100,7 +99,7 @@ function FeaturedCard({ title, subtitle, image, color }: FeaturedCardProps) {
         <h3 className="text-white text-2xl font-bold mb-1">{title}</h3>
         <p className="text-white/80 mb-4">{subtitle}</p>
         <Button 
-          className="bg-white text-gray-800 hover:bg-white/90 transition-transform group-hover:translate-x-2"
+          className="bg-white text-gray-800 hover:bg-white/90 dark:bg-gray-200 dark:text-black dark:hover:bg-gray-300 transition-transform group-hover:translate-x-2"
         >
           Explore
         </Button>

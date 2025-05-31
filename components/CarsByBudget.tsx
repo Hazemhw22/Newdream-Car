@@ -17,7 +17,6 @@ const budgetRanges = [
 export default function CarsByBudget() {
   const [activeRange, setActiveRange] = useState('under10');
   
-  // Filter cars based on active range
   const filteredCars = carsData.filter(car => {
     switch (activeRange) {
       case 'under10':
@@ -34,11 +33,13 @@ export default function CarsByBudget() {
   }).slice(0, 4);
 
   return (
-    <section className="py-10">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">Cars by Budget</h2>
+    <section className="py-10 px-4 bg-white dark:bg-gray-900 transition-colors duration-300">
+      <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">
+        Cars by Budget
+      </h2>
       
       {/* Budget Range Tabs */}
-      <div className="flex flex-wrap gap-2 mb-6 border-b">
+      <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-200 dark:border-gray-700">
         {budgetRanges.map((range) => (
           <button
             key={range.id}
@@ -46,7 +47,7 @@ export default function CarsByBudget() {
               "px-4 py-2 text-sm md:text-base font-medium transition-colors relative",
               activeRange === range.id 
                 ? "text-[#00D1C1] border-b-2 border-[#00D1C1]" 
-                : "text-gray-600 hover:text-gray-800"
+                : "text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
             )}
             onClick={() => setActiveRange(range.id)}
           >
@@ -71,7 +72,7 @@ export default function CarsByBudget() {
       
       {/* View All Link */}
       <div className="mt-8 text-center">
-        <Button variant="outline" className="group">
+        <Button variant="outline" className="group dark:border-gray-600 dark:text-white">
           View All {activeRange === 'under10' ? 'Cars Under 10 Lakh' : 
             activeRange === '10to20' ? 'Cars Between 10-20 Lakh' : 
             activeRange === '20to30' ? 'Cars Between 20-30 Lakh' : 'Luxury Cars'}

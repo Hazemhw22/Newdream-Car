@@ -9,7 +9,7 @@ export default function Head() {
   return (
     <div className="relative h-[500px] md:h-[600px] overflow-hidden">
       {/* Background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0088F8] to-[#00D1C1] overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0088F8] to-[#00D1C1] overflow-hidden dark:from-gray-800 dark:to-gray-900">
         {/* Decorative curved shapes */}
         <div className="absolute bottom-0 left-0 right-0 h-64 w-full">
           <svg 
@@ -32,16 +32,16 @@ export default function Head() {
         <h1 className="text-4xl md:text-6xl font-bold text-center mb-6 animate-fadeIn">
           Let&apos;s find your perfect car
         </h1>
-        
+
         {/* Search Bar */}
-        <div className="w-full max-w-2xl bg-white rounded-full shadow-xl overflow-hidden flex items-center p-1">
+        <div className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-full shadow-xl overflow-hidden flex items-center p-1">
           <div className="flex-shrink-0 pl-4">
-            <Search className="h-5 w-5 text-gray-400" />
+            <Search className="h-5 w-5 text-gray-400 dark:text-gray-300" />
           </div>
           <input
             type="text"
             placeholder="Describe what you're looking for"
-            className="w-full px-4 py-3 text-gray-700 focus:outline-none"
+            className="w-full px-4 py-3 text-gray-700 dark:text-gray-200 dark:placeholder-gray-400 bg-transparent focus:outline-none"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -49,7 +49,7 @@ export default function Head() {
             Search
           </button>
         </div>
-        
+
         {/* Quick Links */}
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <QuickLink href="/new-cars" label="New Cars" />
@@ -66,7 +66,7 @@ function QuickLink({ href, label }: { href: string; label: string }) {
   return (
     <a 
       href={href}
-      className="px-5 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full text-white backdrop-blur-sm transition-all hover:scale-105"
+      className="px-5 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 dark:bg-white/10 dark:hover:bg-white/20 rounded-full text-white backdrop-blur-sm transition-all hover:scale-105"
     >
       {label}
     </a>
