@@ -70,7 +70,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <Mail className="mr-2 h-5 w-5 text-gray-400" />
-                <span className="text-gray-400">info@carfinder.com</span>
+                <span className="text-gray-400">info@NewdreamCar.com</span>
               </li>
             </ul>
           </div>
@@ -79,7 +79,7 @@ export default function Footer() {
         {/* Bottom Footer */}
         <div className="pt-8 border-t border-gray-800 text-sm text-gray-400">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p>&copy; 2025 CarFinder. All rights reserved.</p>
+            <p>&copy; 2025 NewdreamCar. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
