@@ -53,6 +53,26 @@ const carPromotions = [
     bgColor: "bg-gray-600",
     textColor: "text-white",
   },
+  {
+    id: 6,
+    title: "NISSAN ⚡",
+    subtitle: "חדשני וחסכוני בדלק",
+    description: "טכנולוגיה מתקדמת",
+    buttonText: "למידע נוסף",
+    image: "/used-cars-for-sale-in-bronx-11568883664utp7qwvdsg.png",
+    bgColor: "bg-red-600",
+    textColor: "text-white",
+  },
+  {
+    id: 7,
+    title: "TOYOTA 🚘",
+    subtitle: "רכבים ידועים ואמינים",
+    description: "עיצוב מודרני",
+    buttonText: "לפרטים",
+    image: "/STAM-TOYOTA-LAND-CRUISER-2022.png",
+    bgColor: "bg-yellow-500",
+    textColor: "text-black",
+  },
 ]
 
 export default function Hero() {
@@ -74,15 +94,18 @@ export default function Hero() {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
-  const cardsPerView = isMobile ? 1 : 3
-  const maxSlides = Math.max(1, carPromotions.length - cardsPerView + 1)
+  // عرض 1 شريحة في الموبايل، 4 في الديسكتوب
+  const cardsPerView = isMobile ? 1 : 4
+
+  // أقصى عدد للشرائح التي يمكن التنقل بينها (حتى لا نتحرك إلى مكان فارغ)
+  const maxSlides = Math.max(0, carPromotions.length - cardsPerView)
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % maxSlides)
+    setCurrentSlide((prev) => (prev < maxSlides ? prev + 1 : 0))
   }
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + maxSlides) % maxSlides)
+    setCurrentSlide((prev) => (prev > 0 ? prev - 1 : maxSlides))
   }
 
   // Auto Slide Every 4 Seconds (معلق مؤقتًا على الموبايل)
@@ -161,108 +184,83 @@ export default function Hero() {
             </Button>
           </div>
 
-          <p className="text-sm md:text-base text-cyan-600 underline cursor-pointer hover:text-cyan-700 transition-colors">
-            מחפשים רכב להשכרה? »
+          <p className="text-sm md:text-base text-gray-700 dark:text-gray-400">
+            עד 30,000 ₪ מתנה על הלוואת רכב. אנו מציעים את השירות המהיר והאמין ביותר בישראל.
           </p>
         </div>
 
-        {/* القسم المتحرك 🔄 */}
-        <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8">
-            חם ב-<span className="text-cyan-500">ניו דרים קאר</span> 🔥
-          </h2>
-
-          <div
-            className="relative"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-            ref={containerRef}
-          >
-            {/* ازالة ازرار التنقل على الهاتف */}
-            {!isMobile && (
-              <>
-                <button
-                  onClick={prevSlide}
-                  className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 dark:bg-gray-800/80 p-2 md:p-3 rounded-full shadow-lg hover:shadow-xl transition-all"
-                  aria-label="Previous slide"
-                >
-                  <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 dark:bg-gray-800/80 p-2 md:p-3 rounded-full shadow-lg hover:shadow-xl transition-all"
-                  aria-label="Next slide"
-                >
-                  <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
-                </button>
-              </>
-            )}
-
-            {/* الحاوية المتحركة */}
-           <div className="overflow-hidden rounded-xl">
-  <div
-    className="flex transition-transform duration-500 ease-in-out"
-    style={{
-      width: `${carPromotions.length * 100}%`,
-      transform: `translateX(${currentSlide * -100}%)`,
-    }}
-  >
-    {carPromotions.map((promo) => (
-      <div
-        key={promo.id}
-        className="w-full flex-shrink-0 px-2"
-      >
+        {/* السلايدر */}
         <div
-          className={`${promo.bgColor} ${promo.textColor} rounded-xl p-6 md:p-8 h-64 md:h-80 flex flex-col justify-between relative overflow-hidden group cursor-pointer hover:scale-105 transition-transform duration-300`}
+          ref={containerRef}
+          className="flex overflow-hidden relative"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          role="region"
+          aria-label="קידומי רכבים"
         >
-          <div className="absolute inset-0 opacity-20">
-            <Image
-              src={promo.image || "/placeholder.svg"}
-              alt={promo.title}
-              fill
-              className="object-contain object-center"
-              sizes="(max-width: 768px) 100vw, 100vw"
-              priority
-            />
-          </div>
-          <div className="relative z-10">
-            <h3 className="text-lg md:text-xl font-bold">{promo.title}</h3>
-            <p className="text-sm md:text-base mb-2">{promo.subtitle}</p>
-            <p className="text-xs md:text-sm">{promo.description}</p>
-            {promo.buttonText && (
-              <Button className="mt-4 bg-white text-black px-4 py-2 rounded-full text-sm md:text-base hover:bg-gray-200 transition-colors">
-                {promo.buttonText}
-              </Button>
-            )}
+          <div
+            className="flex transition-transform duration-300 ease-in-out"
+            style={{
+              width: `${(carPromotions.length * 100) / cardsPerView}%`,
+              transform: `translateX(-${(currentSlide * 100) / cardsPerView}%)`,
+            }}
+          >
+            {carPromotions.map(({ id, title, subtitle, description, image, bgColor, textColor, buttonText }) => (
+              <div
+                key={id}
+                className={`flex-shrink-0 p-4 md:p-6 rounded-xl flex flex-col justify-between ${bgColor} ${textColor}`}
+                style={{ width: `${100 / carPromotions.length}%`, minWidth: `${100 / cardsPerView}%` }}
+              >
+                <div>
+                  <h3 className="text-lg md:text-xl font-bold mb-2">{title}</h3>
+                  <h4 className="text-md md:text-lg font-semibold mb-2">{subtitle}</h4>
+                  <p className="text-sm md:text-base mb-4">{description}</p>
+                  {buttonText && (
+                    <Button
+                      variant="default"
+                      size="sm"
+                      className="bg-yellow-300 hover:bg-yellow-400 text-black rounded-full"
+                    >
+                      {buttonText}
+                    </Button>
+                  )}
+                </div>
+                <div className="mt-4 flex justify-center">
+                  <Image
+                    src={image}
+                    alt={title}
+                    width={200}
+                    height={120}
+                    className="object-contain rounded-md"
+                    priority
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-    ))}
-  </div>
-</div>
 
-          </div>
+        {/* أزرار التنقل */}
+        <div className="mt-6 flex justify-center gap-4">
+          <button
+            onClick={prevSlide}
+            aria-label="החלק שמאלה"
+            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
+          >
+            ←
+          </button>
+          <button
+            onClick={nextSlide}
+            aria-label="החלק ימינה"
+            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
+          >
+            →
+          </button>
         </div>
       </div>
     </section>
-  )
-}
-
-function ChevronLeft(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <polyline points="15 18 9 12 15 6" />
-    </svg>
-  )
-}
-
-function ChevronRight(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <polyline points="9 18 15 12 9 6" />
-    </svg>
   )
 }
