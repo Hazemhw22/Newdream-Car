@@ -58,12 +58,15 @@ const carPromotions = [
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const containerRef = useRef<HTMLDivElement>(null)
   const touchStartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
   const [isPaused, setIsPaused] = useState(false)
 
-  const maxSlides = Math.max(1, carPromotions.length - 2)
+  // عدد البطاقات المعروضة في كل مرة
+  const cardsPerView = 3
+
+  // حساب عدد الشرائح (كل شريحة تظهر 3 بطاقات)
+  const maxSlides = Math.max(1, carPromotions.length - cardsPerView + 1)
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % maxSlides)
@@ -73,15 +76,14 @@ export default function Hero() {
     setCurrentSlide((prev) => (prev - 1 + maxSlides) % maxSlides)
   }
 
-  // Auto Slide Every 4 Seconds
+  // التمرير التلقائي كل 4 ثواني
   useEffect(() => {
     if (isPaused) return
     const interval = setInterval(nextSlide, 4000)
     return () => clearInterval(interval)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSlide, isPaused])
 
-  // Swipe Events
+  // التعامل مع اللمس للسحب
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX
   }
@@ -108,7 +110,7 @@ export default function Hero() {
       className="w-full bg-white dark:bg-gray-900 py-8 md:py-16 px-4 text-center relative overflow-hidden"
       dir="rtl"
     >
-      {/* الزينة الخلفية */}
+      {/* الخلفية الزخرفية */}
       <div className="absolute left-0 top-0 w-full h-full pointer-events-none">
         <svg className="absolute -left-20 top-0 w-96 h-full" viewBox="0 0 400 800" fill="none">
           <path d="M0 0 Q200 400 0 800" stroke="#00BCD4" strokeWidth="8" fill="none" opacity="0.6" />
@@ -155,7 +157,7 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* القسم المتحرك 🔄 */}
+        {/* القسم المتحرك */}
         <div className="text-center mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8">
             חם ב-<span className="text-cyan-500">ניו דרים קאר</span> 🔥
@@ -168,7 +170,6 @@ export default function Hero() {
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            ref={containerRef}
           >
             <button
               onClick={prevSlide}
@@ -189,10 +190,10 @@ export default function Hero() {
             <div className="overflow-hidden rounded-xl">
               <div
                 className="flex transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(${currentSlide * -33.333}%)` }}
+                style={{ transform: `translateX(${currentSlide * -100 / cardsPerView}%)` }}
               >
                 {carPromotions.map((promo) => (
-                  <div key={promo.id} className="w-full md:w-1/3 flex-shrink-0 px-2">
+                  <div key={promo.id} className="w-1/3 flex-shrink-0 px-2">
                     <div
                       className={`${promo.bgColor} ${promo.textColor} rounded-xl p-6 md:p-8 h-64 md:h-80 flex flex-col justify-between relative overflow-hidden group cursor-pointer hover:scale-105 transition-transform duration-300`}
                     >

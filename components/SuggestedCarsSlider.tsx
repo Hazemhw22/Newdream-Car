@@ -80,13 +80,13 @@ export function SuggestedCarsSlider({ currentCarId }: SuggestedCarsSliderProps) 
       </div>
 
       {/* Mobile Scroll Indicator */}
-      <div className="flex justify-center mt-2 md:hidden">
-        <div className="flex space-x-1">
-          {Array.from({ length: Math.ceil(filteredCars.length / 2) }).map((_, index) => (
-            <div key={index} className="w-2 h-2 bg-gray-300 rounded-full" />
-          ))}
+        <div className="flex justify-center mt-2 md:hidden">
+          <div className="flex space-x-2">
+            {Array.from({ length: Math.ceil(filteredCars.length / 2) }).map((_, index) => (
+              <div key={index} className="w-2 h-2 bg-gray-300 rounded-full" />
+            ))}
+          </div>
         </div>
-      </div>
     </div>
   )
 }
