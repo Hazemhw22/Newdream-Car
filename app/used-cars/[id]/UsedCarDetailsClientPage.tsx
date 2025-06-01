@@ -250,29 +250,7 @@ export default function UsedCarDetailsClientPage({ params }: { params: { id: str
               <div className="text-sm text-gray-500">תשלום חודשי משוער</div>
             </div>
 
-            {/* Mobile Action Buttons */}
-            <div className="grid grid-cols-2 gap-3 mt-6">
-              <Button
-                className="bg-green-500 hover:bg-green-600 text-white h-14 text-lg font-semibold rounded-xl"
-                onClick={handleWhatsAppContact}
-              >
-                וואטסאפ
-              </Button>
-              <Button
-                className="bg-blue-500 hover:bg-blue-600 text-white h-14 text-lg font-semibold rounded-xl"
-                onClick={handlePhoneCall}
-              >
-                התקשר
-              </Button>
-            </div>
-            <Button
-              variant="outline"
-              className="w-full h-14 text-lg font-semibold mt-3 rounded-xl border-2"
-              onClick={() => setShowContactModal(true)}
-            >
-              שמור רכב
-            </Button>
-          </div>
+         
 
           {/* Car Description - Mobile */}
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
@@ -463,6 +441,22 @@ export default function UsedCarDetailsClientPage({ params }: { params: { id: str
                 <div className="text-2xl font-bold text-yellow-900 mb-1">{formatPrice(monthlyPayment)}</div>
                 <div className="text-sm font-semibold text-yellow-800">תשלום חודשי</div>
               </div>
+            </div>
+          </div>
+             {/* Mobile Action Buttons */}
+            <div className="grid grid-cols-2 gap-3 mt-6">
+              <Button
+                className="bg-green-500 hover:bg-green-600 text-white h-14 text-lg font-semibold rounded-xl"
+                onClick={handleWhatsAppContact}
+              >
+                וואטסאפ
+              </Button>
+              <Button
+                className="bg-blue-500 hover:bg-blue-600 text-white h-14 text-lg font-semibold rounded-xl"
+                onClick={handlePhoneCall}
+              >
+                התקשר
+              </Button>
             </div>
           </div>
 
