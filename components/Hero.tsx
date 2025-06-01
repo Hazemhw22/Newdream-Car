@@ -146,7 +146,7 @@ export default function Hero() {
             כל מה שרכב, רק תבחרו 🚘
           </h1>
           <p className="text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            היי, אנחנו freesbe ואצלנו יש הכל: רכבים חדשים, יד שנייה, ליזינג, השכרה, ביטוח וחיי. אז איזה רכב מתאים לך?
+            היי, אנחנו ניו דרים קאר ואצלנו יש הכל: רכבים חדשים, יד שנייה, ליזינג, השכרה, ביטוח וחיי. אז איזה רכב מתאים לך?
           </p>
 
           <div className="flex flex-wrap gap-3 md:gap-4 justify-center mb-6">
