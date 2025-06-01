@@ -411,13 +411,6 @@ export default function CarDetailsClientPage({ params }: { params: { id: string 
                 התקשר
               </Button>
             </div>
-            <Button
-              variant="outline"
-              className="w-full h-14 text-lg font-semibold mt-3 rounded-xl border-2"
-              onClick={() => setShowContactModal(true)}
-            >
-              פרטים נוספים
-            </Button>
           </div>
 
           {/* Suggested Cars - Mobile */}
