@@ -78,6 +78,7 @@ export default function Hero() {
     if (isPaused) return
     const interval = setInterval(nextSlide, 4000)
     return () => clearInterval(interval)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSlide, isPaused])
 
   // Swipe Events
