@@ -21,7 +21,7 @@ export default function CarTypes() {
           return (
             <button
               key={type.name}
-              className="flex flex-col items-center justify-center p-6 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="flex flex-col items-center justify-center p-6 rounded-lg"
             >
               <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-3">
                 <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Heart, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ContactModal from './ContactModal';
@@ -127,9 +128,12 @@ export default function CarCard({ car }: CarCardProps) {
 
             {/* Action Buttons */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <Button variant="outline" className="text-sm dark:border-gray-600 dark:text-gray-200 w-full">
-                Car Details
-              </Button>
+                <Link href={`/new-cars/${car.id}`}>
+                  <Button variant="outline" className="text-sm dark:border-gray-600 dark:text-gray-200 w-full">
+                    Car Details
+                  </Button>
+                </Link>
+
               <Button 
                 onClick={() => setShowContactModal(true)}
                 className="bg-cyan-500 hover:bg-cyan-600 text-white text-sm w-full"

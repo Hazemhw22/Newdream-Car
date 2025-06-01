@@ -1,8 +1,17 @@
-"use client";
+'use client';
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import SearchFilters from '../../components/SearchFilters';
 import CarCard from '../../components/CarCard';
+import { Car, Truck, Zap, CircleDot } from 'lucide-react';
+
+const carTypes = [
+  { name: 'EV', icon: Zap },
+  { name: 'SUV', icon: Car },
+  { name: 'Truck', icon: Truck },
+  { name: 'Sedan', icon: Car },
+  { name: 'Hybrid', icon: CircleDot },
+];
 
 export default function NewCars() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -10,6 +19,7 @@ export default function NewCars() {
   const [priceRange, setPriceRange] = useState('all');
   const [sortBy, setSortBy] = useState('price-low');
   const [displayedCars, setDisplayedCars] = useState(12);
+  const [carType, setCarType] = useState<string | null>(null); // New state
 
   const allCars = [
     {
@@ -21,7 +31,8 @@ export default function NewCars() {
       image: '/2022-Mercedes-Benz-C-Class-White.png',
       features: ['Safety technologies', 'Dual multimedia screens'],
       isHybrid: true,
-      isBestChoice: true
+      isBestChoice: true,
+      type: 'Hybrid'
     },
     {
       id: 2,
@@ -33,8 +44,9 @@ export default function NewCars() {
       features: ['Seven seats with full multimedia', 'Safety technologies'],
       isHybrid: true,
       isBestChoice: true,
-       year: 2022,
-    mileage: 46000
+      year: 2022,
+      mileage: 46000,
+      type: 'SUV'
     },
     {
       id: 3,
@@ -44,8 +56,9 @@ export default function NewCars() {
       image: '/pngimg.com - bmw_PNG99558.png',
       features: ['Suitable vehicle ', 'needs six months usage'],
       award: 'NBC Car of the Year 2025',
-       year: 2020,
-    mileage: 72000
+      year: 2020,
+      mileage: 72000,
+      type: 'SUV'
     },
     {
       id: 4,
@@ -57,7 +70,8 @@ export default function NewCars() {
       features: ['Suitable vehicle - needs six months usage'],
       isBestChoice: true,
       year: 2021,
-      mileage: 58000
+      mileage: 58000,
+      type: 'EV'
     },
     ...Array.from({ length: 20 }, (_, i) => ({
       id: i + 5,
@@ -67,8 +81,9 @@ export default function NewCars() {
       image: '/2022-Mercedes-Benz-C-Class-White.png',
       features: ['Feature 1', 'Feature 2'],
       isHybrid: Math.random() > 0.5,
-       year: 2025,
-       mileage:6000
+      year: 2025,
+      mileage: 6000,
+      type: ['Sedan', 'Truck', 'SUV', 'EV'][i % 4],
     }))
   ];
 
@@ -85,6 +100,9 @@ export default function NewCars() {
         if (car.price < min || (max !== Infinity && car.price > max)) {
           return false;
         }
+      }
+      if (carType && car.type?.toLowerCase() !== carType.toLowerCase()) {
+        return false;
       }
       return true;
     })
@@ -109,7 +127,7 @@ export default function NewCars() {
 
   useEffect(() => {
     setDisplayedCars(12);
-  }, [searchTerm, brand, priceRange, sortBy]);
+  }, [searchTerm, brand, priceRange, sortBy, carType]);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -121,6 +139,30 @@ export default function NewCars() {
           <div className="text-center py-8">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">New Cars</h1>
             <p className="text-xl text-gray-600 dark:text-gray-300">Discover our latest collection of vehicles</p>
+          </div>
+
+          {/* Car Type Filter */}
+          <div className="mb-10">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+              {carTypes.map((type) => {
+                const Icon = type.icon;
+                const isActive = carType === type.name;
+                return (
+                  <button
+                    key={type.name}
+                    onClick={() => setCarType(carType === type.name ? null : type.name)}
+                    className={`flex flex-col items-center justify-center p-6 rounded-lg `}
+                  >
+                    <div
+                      className={`w-12 h-12 rounded-full flex items-center justify-center mb-3`}
+                    >
+                      <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <span className="text-gray-900 dark:text-gray-100 font-medium">{type.name}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Search and Filters */}
