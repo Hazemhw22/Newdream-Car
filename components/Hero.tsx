@@ -202,44 +202,48 @@ export default function Hero() {
             )}
 
             {/* الحاوية المتحركة */}
-            <div className="overflow-hidden rounded-xl">
-              <div
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(${currentSlide * -100}%)` }}
-              >
-                {carPromotions.map((promo) => (
-                  <div
-                    key={promo.id}
-                    className={`${isMobile ? "w-full" : "w-1/3"} flex-shrink-0 px-2`}
-                  >
-                    <div
-                      className={`${promo.bgColor} ${promo.textColor} rounded-xl p-6 md:p-8 h-64 md:h-80 flex flex-col justify-between relative overflow-hidden group cursor-pointer hover:scale-105 transition-transform duration-300`}
-                    >
-                      <div className="absolute inset-0 opacity-20">
-                        <Image
-                          src={promo.image || "/placeholder.svg"}
-                          alt={promo.title}
-                          fill
-                          className="object-contain object-center"
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                          priority
-                        />
-                      </div>
-                      <div className="relative z-10">
-                        <h3 className="text-lg md:text-xl font-bold">{promo.title}</h3>
-                        <p className="text-sm md:text-base mb-2">{promo.subtitle}</p>
-                        <p className="text-xs md:text-sm">{promo.description}</p>
-                        {promo.buttonText && (
-                          <Button className="mt-4 bg-white text-black px-4 py-2 rounded-full text-sm md:text-base hover:bg-gray-200 transition-colors">
-                            {promo.buttonText}
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+           <div className="overflow-hidden rounded-xl">
+  <div
+    className="flex transition-transform duration-500 ease-in-out"
+    style={{
+      width: `${carPromotions.length * 100}%`,
+      transform: `translateX(${currentSlide * -100}%)`,
+    }}
+  >
+    {carPromotions.map((promo) => (
+      <div
+        key={promo.id}
+        className="w-full flex-shrink-0 px-2"
+      >
+        <div
+          className={`${promo.bgColor} ${promo.textColor} rounded-xl p-6 md:p-8 h-64 md:h-80 flex flex-col justify-between relative overflow-hidden group cursor-pointer hover:scale-105 transition-transform duration-300`}
+        >
+          <div className="absolute inset-0 opacity-20">
+            <Image
+              src={promo.image || "/placeholder.svg"}
+              alt={promo.title}
+              fill
+              className="object-contain object-center"
+              sizes="(max-width: 768px) 100vw, 100vw"
+              priority
+            />
+          </div>
+          <div className="relative z-10">
+            <h3 className="text-lg md:text-xl font-bold">{promo.title}</h3>
+            <p className="text-sm md:text-base mb-2">{promo.subtitle}</p>
+            <p className="text-xs md:text-sm">{promo.description}</p>
+            {promo.buttonText && (
+              <Button className="mt-4 bg-white text-black px-4 py-2 rounded-full text-sm md:text-base hover:bg-gray-200 transition-colors">
+                {promo.buttonText}
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
           </div>
         </div>
       </div>
