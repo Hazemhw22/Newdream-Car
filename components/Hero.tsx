@@ -59,7 +59,7 @@ const carPromotions = [
     subtitle: "חדשני וחסכוני בדלק",
     description: "טכנולוגיה מתקדמת",
     buttonText: "למידע נוסף",
-    image: "/used-cars-for-sale-in-bronx-11568883664utp7qwvdsg.png",
+    image: "/2022-Mercedes-Benz-C-Class-White.png",
     bgColor: "bg-red-600",
     textColor: "text-white",
   },
@@ -82,24 +82,24 @@ export default function Hero() {
   const touchEndX = useRef<number | null>(null)
   const [isPaused, setIsPaused] = useState(false)
 
-  // اكتشاف اذا الجهاز موبايل حسب العرض
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768) // أقل من 768 بكسل = موبايل
+      setIsMobile(window.innerWidth < 768)
     }
     handleResize()
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
-  // عرض 1 شريحة في الموبايل، 4 في الديسكتوب
-  const cardsPerView = isMobile ? 1 : 4
+  // نعرض 2 شرائح في الهاتف، 4 في الديسكتوب
+  const cardsPerView = isMobile ? 2 : 4
 
-  // أقصى عدد للشرائح التي يمكن التنقل بينها (حتى لا نتحرك إلى مكان فارغ)
+  // حساب الحد الأعلى للشرائح الممكن التنقل بينها
   const maxSlides = Math.max(0, carPromotions.length - cardsPerView)
 
+  // في RTL، السحب لليسار = السابق، سحب لليمين = التالي
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev < maxSlides ? prev + 1 : 0))
   }
@@ -108,14 +108,7 @@ export default function Hero() {
     setCurrentSlide((prev) => (prev > 0 ? prev - 1 : maxSlides))
   }
 
-  // Auto Slide Every 4 Seconds (معلق مؤقتًا على الموبايل)
-  useEffect(() => {
-    if (isPaused || isMobile) return
-    const interval = setInterval(nextSlide, 4000)
-    return () => clearInterval(interval)
-  }, [currentSlide, isPaused, isMobile])
-
-  // Swipe Events فقط على الموبايل
+  // سحب
   const handleTouchStart = (e: React.TouchEvent) => {
     if (!isMobile) return
     touchStartX.current = e.touches[0].clientX
@@ -129,11 +122,18 @@ export default function Hero() {
   const handleTouchEnd = () => {
     if (!isMobile) return
     if (touchStartX.current === null || touchEndX.current === null) return
+
     const distance = touchStartX.current - touchEndX.current
 
+    // اتجاه السحب معكوس بسبب RTL
     if (Math.abs(distance) > 50) {
-      if (distance > 0) nextSlide()
-      else prevSlide()
+      if (distance > 0) {
+        // المستخدم سحب لليسار => السابق
+        prevSlide()
+      } else {
+        // المستخدم سحب لليمين => التالي
+        nextSlide()
+      }
     }
 
     touchStartX.current = null
@@ -145,7 +145,7 @@ export default function Hero() {
       className="w-full bg-white dark:bg-gray-900 py-8 md:py-16 px-4 text-center relative overflow-hidden"
       dir="rtl"
     >
-      {/* الزينة الخلفية */}
+      {/* الخلفية */}
       <div className="absolute left-0 top-0 w-full h-full pointer-events-none">
         <svg className="absolute -left-20 top-0 w-96 h-full" viewBox="0 0 400 800" fill="none">
           <path d="M0 0 Q200 400 0 800" stroke="#00BCD4" strokeWidth="8" fill="none" opacity="0.6" />
@@ -163,7 +163,6 @@ export default function Hero() {
       </div>
 
       <div className="max-w-6xl mx-auto z-10 relative">
-        {/* عنوان الهيرو */}
         <div className="mb-12 md:mb-16">
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-gray-900 dark:text-white">
             כל מה שרכב, רק תבחרו 🚘
@@ -205,7 +204,7 @@ export default function Hero() {
             className="flex transition-transform duration-300 ease-in-out"
             style={{
               width: `${(carPromotions.length * 100) / cardsPerView}%`,
-              transform: `translateX(-${(currentSlide * 100) / cardsPerView}%)`,
+              transform: `translateX(-${(currentSlide * 100) / carPromotions.length}%)`,
             }}
           >
             {carPromotions.map(({ id, title, subtitle, description, image, bgColor, textColor, buttonText }) => (
@@ -232,8 +231,8 @@ export default function Hero() {
                   <Image
                     src={image}
                     alt={title}
-                    width={200}
-                    height={120}
+                    width={180}
+                    height={110}
                     className="object-contain rounded-md"
                     priority
                   />
