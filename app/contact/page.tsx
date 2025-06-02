@@ -51,7 +51,7 @@ export default function ContactPage() {
       <section className="relative bg-gradient-to-b from-cyan-600 to-cyan-800 text-white">
         <div className="absolute inset-0 opacity-20">
           <Image
-            src="/placeholder.svg?height=400&width=1200"
+            src="/Used-Cars-Feature1024x301.jpg?height=400&width=1200"
             alt="Contact us background"
             fill
             className="object-cover"
@@ -290,7 +290,7 @@ export default function ContactPage() {
                 <h2 className="text-3xl font-bold mb-4">המיקום שלנו</h2>
                 <div className="relative h-[400px] rounded-xl overflow-hidden shadow-lg">
                   <Image
-                    src="/placeholder.svg?height=400&width=600&text=Google+Map"
+                    src="/huramap.png?height=400&width=600&text=Google+Map"
                     alt="מפת מיקום"
                     fill
                     className="object-cover"
@@ -389,19 +389,26 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-cyan-600 to-cyan-800 text-white">
+     {/* CTA Section */}
+      <section className="py-16 bg-gradient-to-r from-cyan-600 to-cyan-800 text-white dark:from-gray-800 dark:to-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">מוכנים לצעד הבא?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            מוכנים לצעד הבא?
+          </h2>
           <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
-            בין אם אתם מחפשים רכב חדש, רכב משומש או אפשרויות מימון, אנחנו כאן כדי לעזור. צרו קשר עוד היום ונשמח לענות על
-            כל שאלה.
+            בין אם אתם מחפשים רכב חדש, רכב משומש או אפשרויות מימון, אנחנו כאן כדי לעזור. צרו קשר עוד היום ונשמח לענות על כל שאלה.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Button size="lg" className="bg-white text-cyan-700 hover:bg-gray-100">
+            <Button
+              size="lg"
+              className="bg-white text-cyan-700 hover:bg-gray-100 dark:bg-cyan-600 dark:text-white dark:hover:bg-cyan-700"
+            >
               <Phone className="mr-2 h-5 w-5" /> התקשר עכשיו
             </Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+            <Button
+              size="lg"
+              className="bg-white text-cyan-700  hover:bg-gray-100 border-white dark:bg-black dark:text-gray-300 dark:border-gray-300 dark:hover:bg-gray-800"
+            >
               <Mail className="mr-2 h-5 w-5" /> שלח אימייל
             </Button>
           </div>

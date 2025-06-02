@@ -12,7 +12,7 @@ export default function AboutPage() {
       <section className="relative bg-gradient-to-b from-cyan-600 to-cyan-800 text-white">
         <div className="absolute inset-0 opacity-20">
           <Image
-            src="/placeholder.svg?height=600&width=1200"
+            src="/Used-Cars-Feature1024x301.jpg?height=400&width=1200"
             alt="Car showroom"
             fill
             className="object-cover"
@@ -27,14 +27,21 @@ export default function AboutPage() {
               אנחנו מחויבים לספק את חווית הרכב הטובה ביותר בישראל, עם מבחר רחב של רכבים חדשים ומשומשים באיכות גבוהה
               ושירות לקוחות מעולה.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Button size="lg" className="bg-white text-cyan-700 hover:bg-gray-100">
-                צור קשר
-              </Button>
-              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-                הרכבים שלנו
-              </Button>
-            </div>
+           <div className="flex flex-wrap gap-4 justify-center">
+            <Button
+              size="lg"
+              className="bg-white text-cyan-700 hover:bg-gray-100 dark:bg-cyan-600 dark:text-white dark:hover:bg-cyan-700"
+            >
+              צור קשר
+            </Button>
+            <Button
+              size="lg"
+              className="text-white border-white hover:bg-white/10 dark:text-gray-300 dark:border-gray-300 dark:hover:bg-gray-800"
+            >
+              הרכבים שלנו
+            </Button>
+          </div>
+
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 dark:from-gray-900 to-transparent"></div>
@@ -79,7 +86,7 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative h-96 rounded-xl overflow-hidden">
               <Image
-                src="/placeholder.svg?height=600&width=800"
+                src="/11564677-600x450.jpeg?height=600&width=800"
                 alt="ניו דרים קאר showroom"
                 fill
                 className="object-cover"
