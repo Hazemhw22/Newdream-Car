@@ -184,27 +184,27 @@ export default function CarDetailsClientPage({ params }: { params: { id: string 
           />
         </div>
 
-        {/* Thumbnails - Responsive */}
-        <div className="overflow-x-auto py-3 px-3 md:py-4 md:px-4 bg-white dark:bg-gray-800">
-          <div className="flex gap-2 md:gap-3 pb-2 md:pb-0">
-            {carData.images.map((image, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedImage(index)}
-                className={`relative h-16 w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 rounded-lg md:rounded-xl overflow-hidden border-2 md:border-3 transition-all flex-shrink-0 active:scale-95 ${
-                  selectedImage === index ? "border-cyan-500 scale-105 shadow-lg" : "border-gray-300"
-                }`}
-              >
-                <Image
-                  src={image || "/placeholder.svg"}
-                  alt={`${carData.name} תצוגה ${index + 1}`}
-                  fill
-                  className="object-cover"
-                />
-              </button>
-            ))}
+       {/* Thumbnails - Responsive */}
+          <div className="overflow-x-auto py-3 px-3 md:py-4 md:px-4 bg-white dark:bg-gray-800">
+            <div className="flex justify-center gap-2 md:gap-3 pb-2 md:pb-0">
+              {carData.images.map((image, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedImage(index)}
+                  className={`relative h-16 w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 rounded-lg md:rounded-xl overflow-hidden border-2 md:border-3 transition-all flex-shrink-0 active:scale-95 ${
+                    selectedImage === index ? "border-cyan-500 scale-105 shadow-lg" : "border-gray-300"
+                  }`}
+                >
+                  <Image
+                    src={image || "/placeholder.svg"}
+                    alt={`${carData.name} תצוגה ${index + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
       </div>
 
       {/* Content Layout - Mobile: Single Column, Desktop: Two Columns */}

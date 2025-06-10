@@ -38,7 +38,7 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
       <div dir="rtl" className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 relative max-w-md sm:max-w-lg lg:max-w-4xl w-full mx-auto border border-gray-300 dark:border-gray-700">
         {/* Used Tag */}
         <div className="absolute top-4 right-4 z-10 flex flex-col gap-2 text-xs sm:text-sm">
-          <div className="bg-yellow-500 text-white px-2 py-0.5 rounded-full font-bold w-fit">רכב יד שנייה</div>
+          <div className="bg-yellow-500 text-white px-2 py-0.5 rounded-full font-bold w-fit"> יד שנייה</div>
         </div>
 
         {/* Heart Button */}

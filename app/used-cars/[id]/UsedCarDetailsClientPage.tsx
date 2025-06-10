@@ -20,17 +20,17 @@ const carData = {
   finalPayment: 69995,
   phone: "+972-50-123-4567",
   whatsapp: "+972501234567",
-  image: "/placeholder.svg?height=600&width=800",
+  image: "/used-cars-for-sale-in-bronx-11568883664utp7qwvdsg.png?height=600&width=800",
   images: [
-    "/placeholder.svg?height=600&width=800",
-    "/placeholder.svg?height=600&width=600",
-    "/placeholder.svg?height=600&width=800",
-    "/placeholder.svg?height=600&width=800",
+    "/used-cars-for-sale-in-bronx-11568883664utp7qwvdsg.png?height=600&width=800",
+    "/used-cars-for-sale-in-bronx-11568883664utp7qwvdsg.png?height=600&width=600",
+    "/used-cars-for-sale-in-bronx-11568883664utp7qwvdsg.png?height=600&width=800",
+    "/used-cars-for-sale-in-bronx-11568883664utp7qwvdsg.png?height=600&width=800",
   ],
   interiorImages: [
-    "/placeholder.svg?height=400&width=600",
-    "/placeholder.svg?height=300&width=400",
-    "/placeholder.svg?height=300&width=400",
+    "/used-cars-for-sale-in-bronx-11568883664utp7qwvdsg.png?height=400&width=600",
+    "/used-cars-for-sale-in-bronx-11568883664utp7qwvdsg.png?height=300&width=400",
+    "/used-cars-for-sale-in-bronx-11568883664utp7qwvdsg.png?height=300&width=400",
   ],
   features: ["שבעה מושבים עם מולטימדיה מלאה", "טכנולוגיות בטיחות"],
   year: 2022,
@@ -193,9 +193,9 @@ export default function UsedCarDetailsClientPage({ params }: { params: { id: str
           />
         </div>
 
-        {/* Thumbnails - Responsive */}
+       {/* Thumbnails - Responsive */}
         <div className="overflow-x-auto py-3 px-3 md:py-4 md:px-4 bg-white dark:bg-gray-800">
-          <div className="flex gap-2 md:gap-3 pb-2 md:pb-0">
+          <div className="flex justify-center gap-2 md:gap-3 pb-2 md:pb-0">
             {carData.images.map((image, index) => (
               <button
                 key={index}
