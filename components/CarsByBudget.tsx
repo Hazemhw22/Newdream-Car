@@ -8,10 +8,10 @@ import { Button } from '../components/ui/button';
 import { carsData } from '../lib/data';
 
 const budgetRanges = [
-  { id: 'under10', label: 'Under 10K IL' },
-  { id: '10to20', label: '10K - 20K IL' },
-  { id: '20to30', label: '20K - 30K IL' },
-  { id: 'luxury', label: 'Luxury Cars' },
+  { id: 'under10', label: 'מתחת ל-10,000 ש"ח' },
+  { id: '10to20', label: '10,000 - 20,000 ש"ח' },
+  { id: '20to30', label: '20,000 - 30,000 ש"ח' },
+  { id: 'luxury', label: 'מכוניות יוקרה' },
 ];
 
 export default function CarsByBudget() {
@@ -35,7 +35,7 @@ export default function CarsByBudget() {
   return (
     <section className="py-10 px-4 bg-white dark:bg-gray-900 transition-colors duration-300">
       <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">
-        Cars by Budget
+        רכבים לפי תקציב
       </h2>
       
       {/* Budget Range Tabs */}
@@ -64,7 +64,7 @@ export default function CarsByBudget() {
             name={car.name}
             brand={car.brand}
             image={car.image}
-            price={`${car.priceRange.min.toFixed(2)}K - ${car.priceRange.max.toFixed(2)}K IL`}
+            price={`${car.priceRange.min.toFixed(2)}K - ${car.priceRange.max.toFixed(2)}K ש"ח`}
             link={`/cars/${car.id}`}
           />
         ))}
@@ -73,9 +73,9 @@ export default function CarsByBudget() {
       {/* View All Link */}
       <div className="mt-8 text-center">
         <Button variant="outline" className="group dark:border-gray-600 dark:text-white">
-          View All {activeRange === 'under10' ? 'Cars Under 10 IL' : 
-            activeRange === '10to20' ? 'Cars Between 10-20 IL' : 
-            activeRange === '20to30' ? 'Cars Between 20-30 IL' : 'Luxury Cars'}
+          הצג את כל ה-{activeRange === 'under10' ? 'רכבים מתחת ל-10,000 ש"ח' : 
+            activeRange === '10to20' ? 'רכבים בין 10,000 ל-20,000 ש"ח' : 
+            activeRange === '20to30' ? 'רכבים בין 20,000 ל-30,000 ש"ח' : 'מכוניות יוקרה'}
           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </Button>
       </div>

@@ -4,17 +4,17 @@ import React from 'react';
 import { Car, Truck, Zap, CircleDot } from 'lucide-react';
 
 const carTypes = [
-  { name: 'EV', icon: Zap },
-  { name: 'SUV', icon: Car },
-  { name: 'Truck', icon: Truck },
-  { name: 'Sedan', icon: Car },
-  { name: 'Hybrid', icon: CircleDot },
+  { name: 'חשמלית', icon: Zap },        // EV
+  { name: 'רכב שטח', icon: Car },       // SUV
+  { name: 'משאית', icon: Truck },       // Truck
+  { name: 'סדאן', icon: Car },           // Sedan
+  { name: 'היברידית', icon: CircleDot }, // Hybrid
 ];
 
 export default function CarTypes() {
   return (
     <div className="mb-12">
-      <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100">Research By Type</h2>
+      <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100">חיפוש לפי סוג</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
         {carTypes.map((type) => {
           const Icon = type.icon;

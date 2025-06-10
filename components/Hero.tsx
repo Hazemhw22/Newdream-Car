@@ -163,7 +163,7 @@ export default function Hero() {
             כל מה שרכב, רק תבחרו 🚘
           </h1>
           <p className="text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            היי, אנחנו ניו דרים קאר ואצלנו יש הכל: רכבים חדשים, יד שנייה, ליזינג, השכרה, ביטוח וחיי. אז איזה רכב מתאים
+            היי, אנחנו אוטו שוקת ואצלנו יש הכל: רכבים חדשים, יד שנייה, ליזינג, השכרה, ביטוח וחיי. אז איזה רכב מתאים
             לך?
           </p>
 
@@ -191,7 +191,7 @@ export default function Hero() {
         {/* Hot Deals Section */}
         <div className="text-center mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8">
-            חם ב-<span className="text-cyan-500">ניו דרים קאר</span> 🔥
+            חם ב-<span className="text-cyan-500">אוטו שוקת</span> 🔥
           </h2>
 
           {/* Car Promotions Carousel */}
