@@ -216,14 +216,14 @@ export default function NewCars() {
             ))}
           </div>
 
-          {/* Load more button */}
+            {/* Load More Button */}
           {visibleCars.length < filteredCars.length && (
             <div className="text-center mt-8 pb-8">
               <button
                 onClick={loadMore}
                 className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-3 rounded-lg font-medium transition-colors"
               >
-                Load more cars
+                טען עוד רכבים
               </button>
             </div>
           )}

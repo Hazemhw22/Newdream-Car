@@ -66,10 +66,10 @@ export default function Head() {
 
     {/* روابط سريعة */}
     <div className="mt-8 flex flex-wrap justify-center gap-4">
-      <QuickLink href="/new-cars" label="New Cars" />
-      <QuickLink href="/used-cars" label="Used Cars" />
-      <QuickLink href="/electric" label="Electric Vehicles" />
-      <QuickLink href="/compare" label="Compare Models" />
+      <QuickLink href="/new-cars" label="רכבים חדשים" />
+      <QuickLink href="/used-cars" label="רכבים יד שנייה" />
+      <QuickLink href="/about" label="אודותינו" />
+      <QuickLink href="/contact" label="צור קשר" />
     </div>
   </div>
 </div>
