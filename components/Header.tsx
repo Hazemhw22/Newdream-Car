@@ -32,13 +32,13 @@ export default function Header() {
           {/* Logo - RTL positioned */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
-              <span className="text-2xl font-bold text-black dark:text-white">ניו דרים קאר</span>
+              <span className="text-2xl font-bold text-black dark:text-white"> אוטו שוקת</span>
             </Link>
           </div>
 
           {/* Location - RTL */}
           <div className="hidden md:flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-            <span>חורה, ישראל</span>
+            <span>באר שבע , ישראל</span>
             <MapPin className="h-4 w-4" />
           </div>
 

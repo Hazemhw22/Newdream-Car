@@ -35,17 +35,17 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
 
   return (
     <>
-      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 relative max-w-md sm:max-w-lg lg:max-w-4xl w-full mx-auto border border-gray-300 dark:border-gray-700">
+      <div dir="rtl" className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 relative max-w-md sm:max-w-lg lg:max-w-4xl w-full mx-auto border border-gray-300 dark:border-gray-700">
         {/* Used Tag */}
-        <div className="absolute top-4 left-4 z-10 flex flex-col gap-2 text-xs sm:text-sm">
-          <div className="bg-yellow-500 text-white px-2 py-0.5 rounded-full font-bold w-fit">USED</div>
+        <div className="absolute top-4 right-4 z-10 flex flex-col gap-2 text-xs sm:text-sm">
+          <div className="bg-yellow-500 text-white px-2 py-0.5 rounded-full font-bold w-fit">רכב יד שנייה</div>
         </div>
 
         {/* Heart Button */}
         <button
           onClick={() => setIsLiked(!isLiked)}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 transition-colors"
-          aria-label={isLiked ? "Unlike" : "Like"}
+          className="absolute top-4 left-4 z-10 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 transition-colors"
+          aria-label={isLiked ? "לא אהבתי" : "אהבתי"}
         >
           <Heart className={`h-5 w-5 ${isLiked ? "fill-red-500 text-red-500" : "text-gray-600 dark:text-gray-400"}`} />
         </button>
@@ -66,7 +66,7 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
           <div className="flex items-center justify-between mb-2 text-xs sm:text-sm">
             <span className="text-gray-600 dark:text-gray-400">{car.brand}</span>
             <span className="text-gray-500 dark:text-gray-400">
-              {car.year} | {car.mileage?.toLocaleString()} km
+              {car.year} | {car.mileage?.toLocaleString()} ק״מ
             </span>
           </div>
 
@@ -77,7 +77,7 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
           <div className="space-y-1 mb-4 text-xs sm:text-sm">
             {car.features.map((feature, index) => (
               <div key={index} className="flex items-center text-gray-600 dark:text-gray-400">
-                <span className="text-green-500 dark:text-green-400 mr-2">✓</span>
+                <span className="text-green-500 dark:text-green-400 ml-2">✓</span>
                 {feature}
               </div>
             ))}
@@ -93,13 +93,13 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
                     {formatPrice(car.originalPrice)}
                   </div>
                 )}
-                <div className="text-xs text-gray-500 dark:text-gray-400">Used car price</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">מחיר לרכב יד שנייה</div>
               </div>
-              <div className="text-right">
+              <div className="text-left">
                 <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  {Math.round(car.price / 60).toLocaleString()} ₪
+                  ₪ {Math.round(car.price / 60).toLocaleString()}
                 </div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">per month</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">לחודש</div>
               </div>
             </div>
 
@@ -107,14 +107,14 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <Link href={`/used-cars/${car.id}`}>
                 <Button variant="outline" className="text-sm dark:border-gray-600 dark:text-gray-200 w-full">
-                  Car Details
+                  פרטי הרכב
                 </Button>
               </Link>
               <Button
                 onClick={() => setShowContactModal(true)}
                 className="bg-cyan-500 hover:bg-cyan-600 text-white text-sm w-full"
               >
-                Contact Us
+                צור קשר
               </Button>
             </div>
           </div>

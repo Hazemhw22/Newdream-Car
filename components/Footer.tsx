@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Company Info - RTL */}
           <div>
-            <h3 className="text-xl font-bold mb-4">ניו דרים קאר</h3>
+            <h3 className="text-xl font-bold mb-4">אוטו שוקת</h3>
             <p className="text-gray-400 mb-4 text-right">
               מצא את הרכב המושלם עבורך עם פלטפורמת החיפוש המקיפה ביותר לרכבים.
             </p>

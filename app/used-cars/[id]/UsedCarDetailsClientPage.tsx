@@ -7,7 +7,6 @@ import { Heart, Share2, ArrowLeft, ChevronLeft, ChevronRight } from "lucide-reac
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { SuggestedCarsSlider } from "@/components/SuggestedCarsSlider"
-import ContactModal from "@/components/ContactModal"
 
 // Mock data - in a real app, you would fetch this from an API
 const carData = {
@@ -66,7 +65,6 @@ const carData = {
 export default function UsedCarDetailsClientPage({ params }: { params: { id: string } }) {
   const [selectedImage, setSelectedImage] = useState(0)
   const [isLiked, setIsLiked] = useState(false)
-  const [showContactModal, setShowContactModal] = useState(false)
 
   // Financing Calculator State
   const [selectedMonths, setSelectedMonths] = useState(60)
@@ -229,7 +227,7 @@ export default function UsedCarDetailsClientPage({ params }: { params: { id: str
             </h1>
             <div className="flex items-center gap-4 justify-center text-base text-gray-600 dark:text-gray-400">
               <span>
-                {carData.year} | {carData.mileage.toLocaleString()} ק"מ
+                {carData.year} | {carData.mileage.toLocaleString()} ק&quot;מ
               </span>
               <span>קטגוריה: {carData.category}</span>
             </div>
@@ -399,7 +397,7 @@ export default function UsedCarDetailsClientPage({ params }: { params: { id: str
                   <span className="text-sm font-medium">תקופת תשלומים</span>
                 </div>
                 <div className="grid grid-cols-3 gap-2">
-                  {[24, 36, 48, 60, 72].map((month) => (
+                  {[12, 24, 48, 60, 72].map((month) => (
                     <button
                       key={month}
                       onClick={() => setSelectedMonths(month)}
@@ -508,7 +506,7 @@ export default function UsedCarDetailsClientPage({ params }: { params: { id: str
               {/* Car Category and Year */}
               <div className="flex items-center gap-4 mb-2 justify-end">
                 <span className="text-gray-600 dark:text-gray-400">
-                  {carData.year} | {carData.mileage.toLocaleString()} ק"מ
+                  {carData.year} | {carData.mileage.toLocaleString()} ק&quot;מ
                 </span>
                 <span className="text-gray-600 dark:text-gray-400">קטגוריה: {carData.category}</span>
               </div>

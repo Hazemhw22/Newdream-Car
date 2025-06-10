@@ -5,13 +5,14 @@ import Header from '../../components/Header';
 import SearchFilters from '../../components/SearchFilters';
 import CarCard from '../../components/UsedCarCard';
 import { Car, Truck, Zap, CircleDot } from 'lucide-react';
+import Image from 'next/image';
 
 const carTypes = [
-  { name: 'EV', icon: Zap },
-  { name: 'SUV', icon: Car },
-  { name: 'Truck', icon: Truck },
-  { name: 'Sedan', icon: Car },
-  { name: 'Hybrid', icon: CircleDot },
+  { name: 'רכב חשמלי', icon: Zap },         // EV
+  { name: 'רכב שטח', icon: Car },            // SUV
+  { name: 'משאית', icon: Truck },             // Truck
+  { name: 'סדאן', icon: Car },                // Sedan
+  { name: 'היברידי', icon: CircleDot },       // Hybrid
 ];
 
 export default function UsedCars() {
@@ -30,10 +31,10 @@ export default function UsedCars() {
       price: 149990,
       originalPrice: 170000,
       image: '/used-cars-for-sale-in-bronx-11568883664utp7qwvdsg.png',
-      features: ['Safety technologies', 'Dual multimedia screens'],
+      features: ['טכנולוגיות בטיחות', 'מסכי מולטימדיה כפולים'],   // Safety technologies, Dual multimedia screens
       isHybrid: true,
       isBestChoice: true,
-      type: 'Hybrid',
+      type: 'היברידי',
       year: 2021,
       mileage: 35000,
     },
@@ -43,10 +44,10 @@ export default function UsedCars() {
       brand: 'Dacia',
       price: 89990,
       image: '/used-cars-for-sale-in-bronx-11568883664utp7qwvdsg.png',
-      features: ['Reliable and fuel efficient', 'Good for city driving'],
+      features: ['אמין וחסכוני בדלק', 'טוב לנהיגה בעיר'],           // Reliable and fuel efficient, Good for city driving
       year: 2018,
       mileage: 75000,
-      type: 'SUV',
+      type: 'רכב שטח',
     },
     {
       id: 103,
@@ -55,11 +56,11 @@ export default function UsedCars() {
       price: 159990,
       originalPrice: 190000,
       image: '/used-cars-for-sale-in-bronx-11568883664utp7qwvdsg.png',
-      features: ['Electric vehicle', 'Comfort and tech packed'],
+      features: ['רכב חשמלי', 'נוחות וטכנולוגיה מתקדמת'],           // Electric vehicle, Comfort and tech packed
       isBestChoice: true,
       year: 2020,
       mileage: 42000,
-      type: 'EV',
+      type: 'רכב חשמלי',
     },
     ...Array.from({ length: 20 }, (_, i) => ({
       id: i + 200,
@@ -67,11 +68,11 @@ export default function UsedCars() {
       brand: ['Chery', 'Dacia', 'Toyota', 'Honda'][i % 4],
       price: Math.floor(Math.random() * 90000) + 40000,
       image: '/used-cars-for-sale-in-bronx-11568883664utp7qwvdsg.png',
-      features: ['Well maintained', 'Single owner'],
+      features: ['שמור היטב', 'בעל יחיד'],    // Well maintained, Single owner
       isHybrid: Math.random() > 0.5,
       year: 2015 + (i % 7),
       mileage: 20000 + i * 3000,
-      type: ['Sedan', 'Truck', 'SUV', 'EV'][i % 4],
+      type: ['סדאן', 'משאית', 'רכב שטח', 'רכב חשמלי'][i % 4],
     }))
   ];
 
@@ -123,13 +124,31 @@ export default function UsedCars() {
 
       <main className="pt-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Page Header */}
-          <div className="text-center py-8">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Used Cars</h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300">Find quality used vehicles at great prices</p>
-          </div>
+          <section className="relative bg-gradient-to-b from-cyan-600 to-cyan-800 text-white">
+            {/* خلفية الصورة مع شفافية */}
+            <div className="absolute inset-0 opacity-50">
+              <Image
+                src="/poster_34f51998fbd34da2a132f940ea18d2b8.jpeg?height=300&width=400"
+                alt="Cars Background"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
 
-          {/* Car Type Filter */}
+            {/* المحتوى */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10 text-center">
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">רכבים משומשים</h1>
+              <p className="text-xl md:text-2xl text-white opacity-90">
+                מצאו רכבים משומשים איכותיים במחירים מעולים
+              </p>
+            </div>  
+
+            {/* תدرג في الأسفل للفصل בין الأقسام */}
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 dark:from-gray-900 to-transparent"></div>
+          </section>
+
+          {/* Car type filter */}
           <div className="mb-10">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
               {carTypes.map((type) => {
@@ -139,20 +158,18 @@ export default function UsedCars() {
                   <button
                     key={type.name}
                     onClick={() => setCarType(carType === type.name ? null : type.name)}
-                    className={`flex flex-col items-center justify-center p-6 rounded-lg ${
-                      isActive ? 'bg-blue-200 dark:bg-blue-800' : ''
-                    }`}
+                    className="flex flex-col items-center justify-center p-6 rounded-lg"
                   >
                     <div
-                      className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 ${
-                        isActive ? 'bg-blue-600 text-white' : 'bg-blue-100 dark:bg-blue-900'
-                      }`}
+                      className={`
+                        w-12 h-12 rounded-full flex items-center justify-center mb-3
+                        transition-colors duration-200
+                        ${isActive ? 'bg-cyan-200 dark:bg-cyan-700' : 'hover:bg-cyan-100 dark:hover:bg-cyan-800'}
+                      `}
                     >
-                      <Icon className="w-6 h-6" />
+                      <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                     </div>
-                    <span className={`font-medium ${isActive ? 'text-blue-700 dark:text-blue-300' : 'text-gray-900 dark:text-gray-100'}`}>
-                      {type.name}
-                    </span>
+                    <span className="text-gray-900 dark:text-gray-100 font-medium">{type.name}</span>
                   </button>
                 );
               })}
@@ -174,7 +191,7 @@ export default function UsedCars() {
           {/* Results Count */}
           <div className="mb-4 mt-2">
             <p className="text-gray-600 dark:text-gray-400">
-              Showing {visibleCars.length} of {filteredCars.length} cars
+              מציגים {visibleCars.length} מתוך {filteredCars.length} רכבים
             </p>
           </div>
 
@@ -192,7 +209,7 @@ export default function UsedCars() {
                 onClick={loadMore}
                 className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-3 rounded-lg font-medium transition-colors"
               >
-                Load More Cars
+                טען עוד רכבים
               </button>
             </div>
           )}
@@ -200,8 +217,8 @@ export default function UsedCars() {
           {/* No Results */}
           {filteredCars.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-xl text-gray-600 dark:text-gray-300">No used cars found matching your criteria.</p>
-              <p className="text-gray-500 dark:text-gray-400 mt-2">Try adjusting your filters or search terms.</p>
+              <p className="text-xl text-gray-600 dark:text-gray-300">לא נמצאו רכבים משומשים התואמים את הקריטריונים שלך.</p>
+              <p className="text-gray-500 dark:text-gray-400 mt-2">נסה להתאים את המסננים או מונחי החיפוש.</p>
             </div>
           )}
         </div>

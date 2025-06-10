@@ -40,8 +40,8 @@ export default function Head() {
 
   {/* المحتوى فوق الخلفية */}
   <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col items-center justify-center text-white">
-    <h1 className="text-4xl md:text-6xl font-bold text-center mb-6 animate-fadeIn">
-      Let&apos;s find your perfect car
+    <h1 className="text-2xl md:text-6xl font-bold text-center mb-6 animate-fadeIn">
+      בוא נמצא את רכב החלומות שלך!
     </h1>
 
     {/* Search Bar */}
@@ -54,7 +54,7 @@ export default function Head() {
       </div>
       <input
         type="text"
-        placeholder="תאר את מה שאתה מחפש"
+        placeholder="חפש את הרכב המתאים עבורך"
         className="w-full px-4 py-3 text-gray-700 dark:text-gray-200 dark:placeholder-gray-400 bg-transparent focus:outline-none"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}

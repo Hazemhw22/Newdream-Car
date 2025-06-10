@@ -586,7 +586,7 @@ export default function CarDetailsClientPage({ params }: { params: { id: string 
                       <span className="text-xs">תקופת תשלומים</span>
                     </div>
                     <div className="flex gap-1">
-                      {[24, 36, 48, 60, 72].map((month) => (
+                     {[12, 24, 36, 48, 60].map((month) => (
                         <button
                           key={month}
                           onClick={() => setSelectedMonths(month)}
