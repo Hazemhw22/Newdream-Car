@@ -12,8 +12,8 @@ export interface Car {
 export const carsData: Car[] = [
   {
     id: 'tata-altroz',
-    name: 'Tata Altroz',
-    brand: 'Tata',
+    name: 'טאטא אלטרוז',
+    brand: 'טאטא',
     image: 'https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     priceRange: {
       min: 6.89,
@@ -22,8 +22,8 @@ export const carsData: Car[] = [
   },
   {
     id: 'tata-nexon',
-    name: 'Tata Nexon',
-    brand: 'Tata',
+    name: 'טאטא נקסון',
+    brand: 'טאטא',
     image: 'https://images.pexels.com/photos/1719647/pexels-photo-1719647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     priceRange: {
       min: 8.00,
@@ -32,8 +32,8 @@ export const carsData: Car[] = [
   },
   {
     id: 'maruti-fronx',
-    name: 'Maruti Fronx',
-    brand: 'Maruti',
+    name: 'מרוטי פרונקס',
+    brand: 'מרוטי',
     image: 'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     priceRange: {
       min: 7.54,
@@ -42,8 +42,8 @@ export const carsData: Car[] = [
   },
   {
     id: 'skoda-slavia',
-    name: 'Skoda Slavia',
-    brand: 'Skoda',
+    name: 'סקודה סלאביה',
+    brand: 'סקודה',
     image: 'https://images.pexels.com/photos/2127733/pexels-photo-2127733.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     priceRange: {
       min: 10.34,
@@ -52,8 +52,8 @@ export const carsData: Car[] = [
   },
   {
     id: 'jeep-compass',
-    name: 'Jeep Compass',
-    brand: 'Jeep',
+    name: 'ג\'יפ קומפאס',
+    brand: 'ג\'יפ',
     image: 'https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     priceRange: {
       min: 18.99,
@@ -62,8 +62,8 @@ export const carsData: Car[] = [
   },
   {
     id: 'volkswagen-virtus',
-    name: 'Volkswagen Virtus',
-    brand: 'Volkswagen',
+    name: 'פולקסווגן וירטוס',
+    brand: 'פולקסווגן',
     image: 'https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     priceRange: {
       min: 11.56,
@@ -72,8 +72,8 @@ export const carsData: Car[] = [
   },
   {
     id: 'honda-city',
-    name: 'Honda City',
-    brand: 'Honda',
+    name: 'הונדה סיטי',
+    brand: 'הונדה',
     image: 'https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     priceRange: {
       min: 12.42,
@@ -82,8 +82,8 @@ export const carsData: Car[] = [
   },
   {
     id: 'mercedes-benz-cla',
-    name: 'Mercedes-Benz CLA',
-    brand: 'Mercedes-Benz',
+    name: 'מרצדס-בנץ CLA',
+    brand: 'מרצדס-בנץ',
     image: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     priceRange: {
       min: 45.50,
@@ -92,8 +92,8 @@ export const carsData: Car[] = [
   },
   {
     id: 'audi-a4',
-    name: 'Audi A4',
-    brand: 'Audi',
+    name: 'אאודי A4',
+    brand: 'אאודי',
     image: 'https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     priceRange: {
       min: 42.34,
@@ -102,8 +102,8 @@ export const carsData: Car[] = [
   },
   {
     id: 'bmw-3-series',
-    name: 'BMW 3 Series',
-    brand: 'BMW',
+    name: 'ב.מ.וו סדרה 3',
+    brand: 'ב.מ.וו',
     image: 'https://images.pexels.com/photos/3589586/pexels-photo-3589586.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     priceRange: {
       min: 46.90,

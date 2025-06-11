@@ -12,14 +12,14 @@ export default function Head() {
   {/* صورة الخلفية */}
   <div className="absolute inset-0 z-0">
     <Image
-      src="/Used-Cars-Feature1024x301.jpg" // غيّر هذا حسب مسار الصورة
+      src="/BMW-electric-and-luxury-car-lineup-with-mountain-background.png" // غيّر هذا حسب مسار الصورة
       alt="Car showroom"
       fill
       className="object-cover"
       priority
     />
     {/* تدرج لوني شفاف فوق الصورة */}
-    <div className="absolute inset-0 bg-gradient-to-r from-[#0088F8]/80 to-[#00D1C1]/80 dark:from-gray-800/90 dark:to-gray-900/90" />
+    <div className="absolute inset-0 bg-gradient-to-r from-[#0088F8]/20 to-[#00D1C1]/20 dark:from-gray-800/30 dark:to-gray-900/30" />
   </div>
 
   {/* شكل زخرفي SVG */}
@@ -31,10 +31,11 @@ export default function Head() {
       style={{ height: "15vw", minHeight: "100px" }}
     >
    <path
-      className="fill-white dark:bg-black"
+      className="fill-white dark:fill-black"
       fillOpacity="1"
       d="M0,224L80,213.3C160,203,320,181,480,181.3C640,181,800,203,960,197.3C1120,192,1280,160,1360,144L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
     />
+
     </svg>
   </div>
 

@@ -8,11 +8,11 @@ import { Car, Truck, Zap, CircleDot } from 'lucide-react';
 import Image from 'next/image';
 
 const carTypes = [
-  { name: 'רכב חשמלי', icon: Zap },         // EV
-  { name: 'רכב שטח', icon: Car },            // SUV
-  { name: 'משאית', icon: Truck },             // Truck
-  { name: 'סדאן', icon: Car },                // Sedan
-  { name: 'היברידי', icon: CircleDot },       // Hybrid
+   { name: 'חשמלי', icon: Zap },        // EV
+  { name: 'רכב פרטי', icon: Car },           // Sedan
+  { name: 'רכב מסחרי', icon: Truck },       // Truck
+  { name: 'רכב שטח', icon: Car },       // SUV
+  { name: 'היברידי', icon: CircleDot }, // Hybrid
 ];
 
 export default function UsedCars() {
@@ -124,7 +124,7 @@ export default function UsedCars() {
 
       <main className="pt-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <section className="relative bg-gradient-to-b from-cyan-600 to-cyan-800 text-white">
+          <section className="relative bg-gradient-to-b  from-[#0088F8]/40 to-[#00D1C1]/40 dark:from-gray-800/30 dark:to-gray-900/30 text-white">
             {/* خلفية الصورة مع شفافية */}
             <div className="absolute inset-0 opacity-50">
               <Image
@@ -149,7 +149,7 @@ export default function UsedCars() {
           </section>
 
           {/* Car type filter */}
-          <div className="mb-10">
+          <div className="mb-3">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
               {carTypes.map((type) => {
                 const Icon = type.icon;
@@ -167,7 +167,7 @@ export default function UsedCars() {
                         ${isActive ? 'bg-cyan-200 dark:bg-cyan-700' : 'hover:bg-cyan-100 dark:hover:bg-cyan-800'}
                       `}
                     >
-                      <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                      <Icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
                     </div>
                     <span className="text-gray-900 dark:text-gray-100 font-medium">{type.name}</span>
                   </button>

@@ -163,7 +163,11 @@ export default function Hero() {
             כל מה שרכב, רק תבחרו 🚘
           </h1>
           <p className="text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            היי, אנחנו אוטו שוקת ואצלנו יש הכל: רכבים חדשים, יד שנייה, ליזינג, השכרה, ביטוח וחיי. אז איזה רכב מתאים
+            היי, אנחנו אוטו שוקת ואצלנו יש הכל: רכבים חדשים, יד שנייה, ליסינג, השכרה
+      
+          </p>
+             <p className="text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+             איזה רכב מתאים
             לך?
           </p>
 
@@ -171,7 +175,7 @@ export default function Hero() {
           <div className="flex flex-wrap gap-3 md:gap-4 justify-center mb-6">
             <Button className="bg-yellow-400 text-black hover:bg-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600 h-12 px-6 rounded-full font-semibold text-sm md:text-base">
               <ArrowLeft className="ml-2 h-4 w-4 rotate-180" />
-              ליזינג פרטי
+              ליסינג פרטי
             </Button>
             <Button className="bg-yellow-400 text-black hover:bg-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600 h-12 px-6 rounded-full font-semibold text-sm md:text-base">
               <ArrowLeft className="ml-2 h-4 w-4 rotate-180" />

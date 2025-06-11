@@ -146,14 +146,7 @@ export default function CarDetailsClientPage({ params }: { params: { id: string 
             >
               <Share2 className="h-4 w-4 md:h-5 md:w-5" />
             </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="rounded-full bg-white/95 dark:bg-gray-800/95 h-10 w-10 md:h-12 md:w-12 shadow-lg"
-              onClick={() => setIsLiked(!isLiked)}
-            >
-              <Heart className={`h-4 w-4 md:h-5 md:w-5 ${isLiked ? "fill-red-500 text-red-500" : ""}`} />
-            </Button>
+         
           </div>
 
           {/* Mobile Image Navigation - Hidden on Desktop */}

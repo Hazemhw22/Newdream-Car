@@ -63,14 +63,7 @@ export default function CarCard({ car }: CarCardProps) {
           )}
         </div>
 
-        {/* Heart Button */}
-        <button
-          onClick={() => setIsLiked(!isLiked)}
-          className="absolute top-4 left-4 z-10 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 transition-colors"
-          aria-label={isLiked ? "הסר אהבתי" : "הוסף למועדפים"}
-        >
-          <Heart className={`h-5 w-5 ${isLiked ? 'fill-red-500 text-red-500' : 'text-gray-600 dark:text-gray-400'}`} />
-        </button>
+       
 
         {/* Car Image */}
         <div className="relative h-40 sm:h-48 lg:h-64 bg-gray-100 dark:bg-gray-700">

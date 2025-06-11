@@ -40,9 +40,9 @@ export default function FeaturedCars() {
         </div>
       </div>
       
-      <div 
+      <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide md:scrollbar-none"
+        className="flex gap-6 overflow-x-auto pb-4 px-6 scrollbar-hide"
       >
         <FeaturedCard 
           title="צ'רי"
@@ -82,15 +82,15 @@ interface FeaturedCardProps {
 
 function FeaturedCard({ title, subtitle, image, color }: FeaturedCardProps) {
   return (
-    <div className="flex-shrink-0 w-full sm:w-[350px] md:w-[400px] h-[240px] rounded-xl overflow-hidden relative group shadow-md dark:shadow-lg">
-      <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/40 to-transparent z-10"></div>
+    <div className="flex-shrink-0 w-full sm:w-[300px] md:w-[350px] h-[240px] rounded-xl overflow-hidden relative group shadow-md dark:shadow-lg px-2">
+      <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/40 to-transparent z-10 rounded-xl"></div>
       
       {/* Background Image */}
-      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${image})` }}></div>
+      <div className="absolute inset-0 bg-cover bg-center rounded-xl" style={{ backgroundImage: `url(${image})` }}></div>
       
-      {/* Colored Overlay - Only visible on hover */}
+      {/* Colored Overlay */}
       <div className={cn(
-        "absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-300",
+        "absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-300 rounded-xl",
         color
       )}></div>
       

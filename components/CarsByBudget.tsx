@@ -3,9 +3,10 @@
 import React, { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '../lib/utils';
-import CarCard from '../components/ui/CarCard';
+import CarPriceCard from '../components/cardbudget';
+import ContactModal from '../components/ContactModal';
 import { Button } from '../components/ui/button';
-import { carsData } from '../lib/data';
+import { carsData, Car } from '../lib/data';
 
 const budgetRanges = [
   { id: 'under10', label: 'מתחת ל-10,000 ש"ח' },
@@ -14,9 +15,17 @@ const budgetRanges = [
   { id: 'luxury', label: 'מכוניות יוקרה' },
 ];
 
+// פונקציה להמרת מחירי K ל-ש"ח מלאים עם פסיקים
+function formatPriceInILS(kPrice: number) {
+  const fullPrice = Math.round(kPrice * 1000);
+  return fullPrice.toLocaleString('he-IL');
+}
+
 export default function CarsByBudget() {
   const [activeRange, setActiveRange] = useState('under10');
-  
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedCar, setSelectedCar] = useState<Car | null>(null);
+
   const filteredCars = carsData.filter(car => {
     switch (activeRange) {
       case 'under10':
@@ -31,6 +40,16 @@ export default function CarsByBudget() {
         return true;
     }
   }).slice(0, 4);
+
+  const openInquiryModal = (car: Car) => {
+    setSelectedCar(car);
+    setModalOpen(true);
+  };
+
+  const closeInquiryModal = () => {
+    setModalOpen(false);
+    setSelectedCar(null);
+  };
 
   return (
     <section className="py-10 px-4 bg-white dark:bg-gray-900 transition-colors duration-300">
@@ -59,13 +78,13 @@ export default function CarsByBudget() {
       {/* Car Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {filteredCars.map((car) => (
-          <CarCard
+          <CarPriceCard
             key={car.id}
             name={car.name}
             brand={car.brand}
             image={car.image}
-            price={`${car.priceRange.min.toFixed(2)}K - ${car.priceRange.max.toFixed(2)}K ש"ח`}
-            link={`/cars/${car.id}`}
+            price={`${formatPriceInILS(car.priceRange.min)} - ${formatPriceInILS(car.priceRange.max)} ש"ח`}
+            onInquiry={() => openInquiryModal(car)}
           />
         ))}
       </div>
@@ -79,6 +98,17 @@ export default function CarsByBudget() {
           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </Button>
       </div>
+
+      {/* Contact Modal */}
+      {selectedCar && (
+        <ContactModal
+          isOpen={modalOpen}
+          onClose={closeInquiryModal}
+          carName={selectedCar.name}
+          carImage={selectedCar.image}
+          carPrice={selectedCar.priceRange.min * 1000} // מחיר מינימום בש"ח מלא
+        />
+      )}
     </section>
   );
 }
