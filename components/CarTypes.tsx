@@ -86,21 +86,6 @@ export default function CarTypes() {
           <span className="text-gray-900 dark:text-gray-100 font-medium text-sm">{carTypes[3].name}</span>
         </button>
       </div>
-
-      <style jsx>{`
-        @media (min-width: 768px) {
-          div[style] {
-            display: grid !important;
-            grid-template-columns: repeat(5, 1fr) !important;
-            grid-template-rows: 1fr !important;
-            gap: 1.5rem !important;
-            grid-template-areas: none !important;
-          }
-          button[style] {
-            grid-area: auto !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }
