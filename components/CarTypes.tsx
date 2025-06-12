@@ -80,7 +80,7 @@ export default function CarTypes() {
           className="flex flex-col items-center justify-center rounded-lg p-4"
           style={{ gridArea: 'e' }}
         >
-          <div className="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-">
+          <div className="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-2">
             <Icon4 className="w-8 h-8 text-blue-600 dark:text-blue-400" />
           </div>
           <span className="text-gray-900 dark:text-gray-100 font-medium text-sm">{carTypes[3].name}</span>
