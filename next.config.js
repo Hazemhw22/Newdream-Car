@@ -1,6 +1,10 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
-  images: { unoptimized: true },
+  images: {
+    unoptimized: true,
+    domains: ["images.pexels.com"], // 👈 أضف هذا السطر
+  },
   webpack: (config) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,
@@ -10,3 +14,5 @@ const nextConfig = {
     return config;
   },
 };
+
+module.exports = nextConfig;
