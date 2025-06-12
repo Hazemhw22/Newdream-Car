@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -94,6 +93,7 @@ export default function Hero() {
     if (isPaused || isMobile) return
     const interval = setInterval(nextSlide, 4000)
     return () => clearInterval(interval)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSlide, isPaused, isMobile, maxSlides])
 
   // Touch events for mobile

@@ -2,29 +2,27 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Heart, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ContactModal from './ContactModal';
 
 interface CarCardProps {
   car: {
-    id: number;
+    id: string;  // id as string
     name: string;
     brand: string;
-    price: number;
+    sale_price: number;
     originalPrice?: number;
     image: string;
-    features: string[];
-    isHybrid?: boolean;
-    award?: string;
+    features?: string[]; 
     isBestChoice?: boolean;
     year?: number;
-    mileage?: number;
+    kilometers?: number;
+    award?: string;
   };
 }
 
 export default function CarCard({ car }: CarCardProps) {
-  const [isLiked, setIsLiked] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
 
   const formatPrice = (price: number) => {
@@ -63,8 +61,6 @@ export default function CarCard({ car }: CarCardProps) {
           )}
         </div>
 
-       
-
         {/* Car Image */}
         <div className="relative h-40 sm:h-48 lg:h-64 bg-gray-100 dark:bg-gray-700">
           <Image
@@ -80,7 +76,9 @@ export default function CarCard({ car }: CarCardProps) {
         <div className="p-3 sm:p-4">
           <div className="flex items-center justify-between mb-2 text-xs sm:text-sm">
             <span className="text-gray-600 dark:text-gray-400">{car.brand}</span>
-            <span className="text-gray-500 dark:text-gray-400">{car.year} | {car.mileage?.toLocaleString()} ק&quot;מ</span>
+            <span className="text-gray-500 dark:text-gray-400">
+              {car.year} | {car.kilometers?.toLocaleString()} ק&quot;מ
+            </span>
           </div>
 
           {/* Car Name */}
@@ -89,40 +87,42 @@ export default function CarCard({ car }: CarCardProps) {
           </h3>
 
           {/* Features */}
-          <div className="space-y-1 mb-4 text-xs sm:text-sm">
-            {car.features.map((feature, index) => (
-              <div key={index} className="flex items-center text-gray-600 dark:text-gray-400">
-                <span className="text-green-500 dark:text-green-400 ml-2">✓</span>
-                {feature}
-              </div>
-            ))}
-          </div>
+          {car.features && car.features.length > 0 && (
+            <div className="space-y-1 mb-4 text-xs sm:text-sm">
+              {car.features.map((feature, index) => (
+                <div key={index} className="flex items-center text-gray-600 dark:text-gray-400">
+                  <span className="text-green-500 dark:text-green-400 ml-2">✓</span>
+                  {feature}
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Price Section */}
           <div className="border-t border-gray-300 dark:border-gray-700 pt-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 space-y-2 sm:space-y-0">
               <div>
-                <div className="text-xl sm:text-xl font-bold text-gray-900 dark:text-gray-100">
-                  {formatPrice(car.price)}
+                <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                  {formatPrice(car.sale_price)}
                 </div>
                 {car.originalPrice && (
-                  <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 line-through">
+                  <div className="text-xs text-gray-500 dark:text-gray-400 line-through">
                     {formatPrice(car.originalPrice)}
                   </div>
                 )}
-                <div className="text-xs sm:text-xs text-gray-500 dark:text-gray-400">מחיר לפני הנחה</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">מחיר לפני הנחה</div>
               </div>
               <div className="text-right">
                 <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  ₪{Math.round(car.price / 60).toLocaleString()}
+                  ₪{Math.round(car.sale_price / 60).toLocaleString()}
                 </div>
-                <div className="text-xs sm:text-xs text-gray-500 dark:text-gray-400">לחודש</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">לחודש</div>
               </div>
             </div>
 
             {/* Action Buttons */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <Link href={`/new-cars/${car.id}`}>
+              <Link href={`/new-cars/${car.id.toString()}`}>
                 <Button variant="outline" className="text-sm dark:border-gray-600 dark:text-gray-200 w-full">
                   פרטי רכב
                 </Button>
@@ -143,8 +143,8 @@ export default function CarCard({ car }: CarCardProps) {
         onClose={() => setShowContactModal(false)}
         carName={car.name}
         carImage={car.image}
-        carPrice={car.price}
-        mileage={car.mileage}
+        carPrice={car.sale_price}
+        mileage={car.kilometers}
         year={car.year}
       />
     </>

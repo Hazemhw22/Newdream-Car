@@ -1,113 +1,77 @@
-export interface Car {
-  id: string;
-  name: string;
-  brand: string;
-  image: string;
-  priceRange: {
-    min: number;
-    max: number;
-  };
-}
+import { Car } from './types';
 
 export const carsData: Car[] = [
   {
     id: 'tata-altroz',
+    created_at: '2025-06-01T00:00:00Z',
+    title: 'טאטא אלטרוז',
     name: 'טאטא אלטרוז',
+    year: 2024,
+    status: 'available',
+    market_price: 7.5,
+    value_price: 6.9,
+    sale_price: 6.89,
+    kilometers: 15000,
+    provider: 'Tata Motors',
     brand: 'טאטא',
-    image: 'https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    image: 'https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg',
+    images: [
+      'https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg',
+      'https://images.pexels.com/photos/116676/pexels-photo-116676.jpeg',
+    ],
     priceRange: {
       min: 6.89,
       max: 11.49,
     },
+    features: []
   },
   {
     id: 'tata-nexon',
+    created_at: '2025-06-01T00:00:00Z',
+    title: 'טאטא נקסון',
     name: 'טאטא נקסון',
+    year: 2023,
+    status: 'available',
+    market_price: 10.2,
+    value_price: 9.4,
+    sale_price: 8.0,
+    kilometers: 18000,
+    provider: 'Tata Motors',
     brand: 'טאטא',
-    image: 'https://images.pexels.com/photos/1719647/pexels-photo-1719647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    image: 'https://images.pexels.com/photos/1719647/pexels-photo-1719647.jpeg',
+    images: [
+      'https://images.pexels.com/photos/1719647/pexels-photo-1719647.jpeg',
+      'https://images.pexels.com/photos/1719648/pexels-photo-1719648.jpeg',
+    ],
     priceRange: {
-      min: 8.00,
-      max: 15.60,
+      min: 8.0,
+      max: 15.6,
     },
+    features: []
   },
   {
     id: 'maruti-fronx',
+    created_at: '2025-06-01T00:00:00Z',
+    title: 'מרוטי פרונקס',
     name: 'מרוטי פרונקס',
+    year: 2024,
+    status: 'available',
+    market_price: 9.5,
+    value_price: 8.8,
+    sale_price: 7.54,
+    kilometers: 12000,
+    provider: 'Maruti Suzuki',
     brand: 'מרוטי',
-    image: 'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    image: 'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg',
+    images: [
+      'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg',
+      'https://images.pexels.com/photos/210020/pexels-photo-210020.jpeg',
+    ],
     priceRange: {
       min: 7.54,
       max: 13.06,
     },
+    features: []
   },
-  {
-    id: 'skoda-slavia',
-    name: 'סקודה סלאביה',
-    brand: 'סקודה',
-    image: 'https://images.pexels.com/photos/2127733/pexels-photo-2127733.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    priceRange: {
-      min: 10.34,
-      max: 18.25,
-    },
-  },
-  {
-    id: 'jeep-compass',
-    name: 'ג\'יפ קומפאס',
-    brand: 'ג\'יפ',
-    image: 'https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    priceRange: {
-      min: 18.99,
-      max: 28.50,
-    },
-  },
-  {
-    id: 'volkswagen-virtus',
-    name: 'פולקסווגן וירטוס',
-    brand: 'פולקסווגן',
-    image: 'https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    priceRange: {
-      min: 11.56,
-      max: 19.41,
-    },
-  },
-  {
-    id: 'honda-city',
-    name: 'הונדה סיטי',
-    brand: 'הונדה',
-    image: 'https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    priceRange: {
-      min: 12.42,
-      max: 17.86,
-    },
-  },
-  {
-    id: 'mercedes-benz-cla',
-    name: 'מרצדס-בנץ CLA',
-    brand: 'מרצדס-בנץ',
-    image: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    priceRange: {
-      min: 45.50,
-      max: 65.25,
-    },
-  },
-  {
-    id: 'audi-a4',
-    name: 'אאודי A4',
-    brand: 'אאודי',
-    image: 'https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    priceRange: {
-      min: 42.34,
-      max: 56.50,
-    },
-  },
-  {
-    id: 'bmw-3-series',
-    name: 'ב.מ.וו סדרה 3',
-    brand: 'ב.מ.וו',
-    image: 'https://images.pexels.com/photos/3589586/pexels-photo-3589586.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    priceRange: {
-      min: 46.90,
-      max: 68.75,
-    },
-  },
+  // يمكنك إضافة المزيد من السيارات بنفس النمط...
 ];

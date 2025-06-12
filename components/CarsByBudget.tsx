@@ -6,7 +6,8 @@ import { cn } from '../lib/utils';
 import CarPriceCard from '../components/cardbudget';
 import ContactModal from '../components/ContactModal';
 import { Button } from '../components/ui/button';
-import { carsData, Car } from '../lib/data';
+import { carsData } from '../lib/data';
+import { Car } from "../lib/types";
 
 const budgetRanges = [
   { id: 'under10', label: 'מתחת ל-10,000 ש"ח' },
@@ -45,6 +46,7 @@ export default function CarsByBudget() {
     setSelectedCar(car);
     setModalOpen(true);
   };
+  
 
   const closeInquiryModal = () => {
     setModalOpen(false);
