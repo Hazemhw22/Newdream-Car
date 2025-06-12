@@ -31,7 +31,7 @@ export default async function NewCarsPage() {
             image:
               car.images && car.images.length > 0
                 ? car.images[0]
-                : "/placeholder-car.jpg",
+                : "/placeholder-car.jpg?",
             features: car.features,
             isBestChoice: false,
             year: car.year,
