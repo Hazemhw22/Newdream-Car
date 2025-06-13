@@ -1,18 +1,24 @@
-import CarDetailsClientPage from "./UsedCarDetailsClientPage"
+import { createServerSupabaseClient } from "../../../lib/supabaseClient";
+import CarDetailsClientPage from "./UsedCarDetailsClientPage";
+import { notFound } from "next/navigation";
 
-export async function generateStaticParams() {
-
-  const regularIds = Array.from({ length: 400 }, (_, i) => (i + 1).toString())
-
-  const specificIds = ["209", "210", "211", "212", "213", "214", "215"]
-
-  const carIds = [...regularIds, ...specificIds]
-
-  return carIds.map((id) => ({
-    id: id,
-  }))
+interface Params {
+  params: { id: string };
 }
 
-export default function CarDetailsPage({ params }: { params: { id: string } }) {
-  return <CarDetailsClientPage params={params} />
+export default async function CarPage({ params }: Params) {
+  const { id } = params;
+  const supabase = createServerSupabaseClient();
+
+  const { data: car, error } = await supabase
+    .from("cars")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error || !car) {
+    notFound();
+  }
+
+  return <CarDetailsClientPage params={{ id }} />;
 }

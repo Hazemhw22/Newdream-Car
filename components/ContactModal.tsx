@@ -17,7 +17,7 @@ interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
   carName: string;
-  carImage: string;
+  carImages: string[];
   carPrice: number;
   year?: number;
   mileage?: number;
@@ -27,7 +27,7 @@ export default function ContactModal({
   isOpen,
   onClose,
   carName,
-  carImage,
+  carImages,
   carPrice,
   year,
   mileage,
@@ -50,13 +50,24 @@ export default function ContactModal({
         {/* כותרת ושם הרכב */}
         <DialogHeader>
           <DialogTitle>צור קשר לגבי:</DialogTitle>
-          <div className="text-lg font-bold text-gray-800 dark:text-gray-200">{carName}</div>
+          <div className="text-lg font-bold text-gray-800 dark:text-gray-200">
+            {carName}
+          </div>
         </DialogHeader>
 
         <div className="space-y-4">
           {/* صورة السيارة */}
           <div className="relative w-full h-48 rounded overflow-hidden">
-            <Image src={carImage} alt={carName} fill className="object-cover" />
+            <Image
+              src={
+                process.env.NEXT_PUBLIC_SUPABASE_URL +
+                  "/storage/v1/object/public/cars/" +
+                  carImages[0] || ""
+              }
+              alt={carName}
+              fill
+              className="object-cover"
+            />
           </div>
 
           {/* تفاصيل السعر */}
@@ -71,7 +82,8 @@ export default function ContactModal({
             )}
             {mileage && (
               <p>
-                <strong>קילומטראז&apos;:</strong> {mileage.toLocaleString()} ק&quot;מ
+                <strong>קילומטראז&apos;:</strong> {mileage.toLocaleString()}{" "}
+                ק&quot;מ
               </p>
             )}
           </div>
@@ -79,7 +91,10 @@ export default function ContactModal({
           {/* כפתורי יצירת קשר */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4">
             <a href={formattedPhone} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" className="w-full flex gap-2 items-center justify-center">
+              <Button
+                variant="outline"
+                className="w-full flex gap-2 items-center justify-center"
+              >
                 <PhoneCall className="w-4 h-4" />
                 התקשרו אלינו
               </Button>

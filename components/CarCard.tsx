@@ -13,7 +13,7 @@ interface CarCardProps {
     brand: string;
     sale_price: number;
     originalPrice?: number;
-    image: string;
+    images: string[];
     features?: string[]; 
     isBestChoice?: boolean;
     year?: number;
@@ -24,6 +24,7 @@ interface CarCardProps {
 
 export default function CarCard({ car }: CarCardProps) {
   const [showContactModal, setShowContactModal] = useState(false);
+
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('he-IL', {
@@ -56,7 +57,9 @@ export default function CarCard({ car }: CarCardProps) {
 
           {car.award && (
             <div className="bg-yellow-100 border-2 border-yellow-400 px-2 py-1 rounded text-xs font-bold text-center text-gray-900 dark:text-gray-900">
-              רכב השנה<br />2025
+              רכב השנה
+              <br />
+              2025
             </div>
           )}
         </div>
@@ -64,10 +67,14 @@ export default function CarCard({ car }: CarCardProps) {
         {/* Car Image */}
         <div className="relative h-40 sm:h-48 lg:h-64 bg-gray-100 dark:bg-gray-700">
           <Image
-            src={car.image}
+            src={
+              process.env.NEXT_PUBLIC_SUPABASE_URL +
+              "/storage/v1/object/public/cars/" +
+              car.images[0] || ""
+            }
             alt={car.name}
             fill
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: "cover" }}
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>
@@ -75,7 +82,9 @@ export default function CarCard({ car }: CarCardProps) {
         {/* Card Content */}
         <div className="p-3 sm:p-4">
           <div className="flex items-center justify-between mb-2 text-xs sm:text-sm">
-            <span className="text-gray-600 dark:text-gray-400">{car.brand}</span>
+            <span className="text-gray-600 dark:text-gray-400">
+              {car.brand}
+            </span>
             <span className="text-gray-500 dark:text-gray-400">
               {car.year} | {car.kilometers?.toLocaleString()} ק&quot;מ
             </span>
@@ -90,8 +99,13 @@ export default function CarCard({ car }: CarCardProps) {
           {car.features && car.features.length > 0 && (
             <div className="space-y-1 mb-4 text-xs sm:text-sm">
               {car.features.map((feature, index) => (
-                <div key={index} className="flex items-center text-gray-600 dark:text-gray-400">
-                  <span className="text-green-500 dark:text-green-400 ml-2">✓</span>
+                <div
+                  key={index}
+                  className="flex items-center text-gray-600 dark:text-gray-400"
+                >
+                  <span className="text-green-500 dark:text-green-400 ml-2">
+                    ✓
+                  </span>
                   {feature}
                 </div>
               ))}
@@ -110,20 +124,27 @@ export default function CarCard({ car }: CarCardProps) {
                     {formatPrice(car.originalPrice)}
                   </div>
                 )}
-                <div className="text-xs text-gray-500 dark:text-gray-400">מחיר לפני הנחה</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">
+                  מחיר לפני הנחה
+                </div>
               </div>
               <div className="text-right">
                 <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                   ₪{Math.round(car.sale_price / 60).toLocaleString()}
                 </div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">לחודש</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">
+                  לחודש
+                </div>
               </div>
             </div>
 
             {/* Action Buttons */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <Link href={`/new-cars/${car.id.toString()}`}>
-                <Button variant="outline" className="text-sm dark:border-gray-600 dark:text-gray-200 w-full">
+                <Button
+                  variant="outline"
+                  className="text-sm dark:border-gray-600 dark:text-gray-200 w-full"
+                >
                   פרטי רכב
                 </Button>
               </Link>
@@ -138,15 +159,15 @@ export default function CarCard({ car }: CarCardProps) {
         </div>
       </div>
 
-      <ContactModal
+       <ContactModal
         isOpen={showContactModal}
         onClose={() => setShowContactModal(false)}
         carName={car.name}
-        carImage={car.image}
+        carImages={car.images}
         carPrice={car.sale_price}
         mileage={car.kilometers}
         year={car.year}
-      />
+      /> 
     </>
   );
 }

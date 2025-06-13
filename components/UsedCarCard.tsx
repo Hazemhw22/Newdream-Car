@@ -13,7 +13,7 @@ interface UsedCarCardProps {
     brand: string;
     price: number;
     originalPrice?: number;
-    image: string;
+    images: string[];
     features: string[];
     year?: number;
     mileage?: number;
@@ -56,7 +56,11 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
         {/* Car Image */}
         <div className="relative h-40 sm:h-48 lg:h-64 bg-gray-100 dark:bg-gray-700">
           <Image
-            src={car.image || "/placeholder.svg"}
+            src={
+              process.env.NEXT_PUBLIC_SUPABASE_URL +
+                "/storage/v1/object/public/cars/" +
+                car.images[0] || ""
+            }
             alt={car.name}
             fill
             style={{ objectFit: "cover" }}
@@ -147,7 +151,7 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
         isOpen={showContactModal}
         onClose={() => setShowContactModal(false)}
         carName={car.name}
-        carImage={car.image}
+        carImages={car.images}
         carPrice={car.price}
         mileage={car.mileage}
         year={car.year}

@@ -107,7 +107,7 @@ export default function CarsByBudget() {
           isOpen={modalOpen}
           onClose={closeInquiryModal}
           carName={selectedCar.name}
-          carImage={selectedCar.image}
+          carImages={selectedCar.images}
           carPrice={selectedCar.priceRange.min * 1000} // מחיר מינימום בש"ח מלא
         />
       )}

@@ -1,47 +1,24 @@
-import CarDetailsClientPage from "./CarDetailsClientPage"
+import { createServerSupabaseClient } from "../../../lib/supabaseClient";
+import CarDetailsClientPage from "./CarDetailsClientPage";
+import { notFound } from "next/navigation";
 
-// Generate static params for static export
-export async function generateStaticParams() {
-  // In a real app, you would fetch all car IDs from your API/database
-  // For now, we'll return a comprehensive list of sample IDs to cover common cases
-  const carIds = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-    "21",
-    "22",
-    "23",
-    "24",
-    "25",
-    "26",
-    "27",
-    "28",
-    "29",
-    "30",
-  ]
-
-  return carIds.map((id) => ({
-    id: id,
-  }))
+interface Params {
+  params: { id: string };
 }
 
-export default function CarDetailsPage({ params }: { params: { id: string } }) {
-  return <CarDetailsClientPage params={params} />
+export default async function CarPage({ params }: Params) {
+  const { id } = params;
+  const supabase = createServerSupabaseClient();
+
+  const { data: car, error } = await supabase
+    .from("cars")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error || !car) {
+    notFound();
+  }
+
+  return <CarDetailsClientPage car={car} />;
 }

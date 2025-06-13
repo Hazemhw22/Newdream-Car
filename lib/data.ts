@@ -23,7 +23,8 @@ export const carsData: Car[] = [
       min: 6.89,
       max: 11.49,
     },
-    features: []
+    features: [],
+    description: ''
   },
   {
     id: 'tata-nexon',
@@ -47,7 +48,8 @@ export const carsData: Car[] = [
       min: 8.0,
       max: 15.6,
     },
-    features: []
+    features: [],
+    description: ''
   },
   {
     id: 'maruti-fronx',
@@ -71,7 +73,8 @@ export const carsData: Car[] = [
       min: 7.54,
       max: 13.06,
     },
-    features: []
+    features: [],
+    description: ''
   },
   // يمكنك إضافة المزيد من السيارات بنفس النمط...
 ];
