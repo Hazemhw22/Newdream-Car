@@ -1,21 +1,43 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
-import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter, Linkedin, CheckCircle } from "lucide-react"
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+  CheckCircle,
+} from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "השם חייב להכיל לפחות 2 תווים" }),
@@ -23,10 +45,10 @@ const formSchema = z.object({
   phone: z.string().min(9, { message: "אנא הזן מספר טלפון תקין" }),
   subject: z.string().min(1, { message: "אנא בחר נושא" }),
   message: z.string().min(10, { message: "ההודעה חייבת להכיל לפחות 10 תווים" }),
-})
+});
 
 export default function ContactPage() {
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -37,11 +59,11 @@ export default function ContactPage() {
       subject: "",
       message: "",
     },
-  })
+  });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-    setIsSubmitted(true)
+    console.log(values);
+    setIsSubmitted(true);
     // In a real app, you would send the form data to your server here
   }
 
@@ -60,10 +82,15 @@ export default function ContactPage() {
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
-            <Badge className="bg-white text-cyan-700 mb-6 px-4 py-1 text-sm">אנחנו כאן בשבילך</Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">צור קשר</h1>
+            <Badge className="bg-white text-cyan-700 mb-6 px-4 py-1 text-sm">
+              אנחנו כאן בשבילך
+            </Badge>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              צור קשר
+            </h1>
             <p className="text-lg md:text-xl opacity-90 mb-8">
-              יש לך שאלות? אנחנו כאן כדי לעזור. צוות שירות הלקוחות שלנו זמין לענות על כל שאלה ולסייע בכל צורך.
+              יש לך שאלות? אנחנו כאן כדי לעזור. צוות שירות הלקוחות שלנו זמין
+              לענות על כל שאלה ולסייע בכל צורך.
             </p>
           </div>
         </div>
@@ -82,7 +109,9 @@ export default function ContactPage() {
                 <CardTitle>כתובת</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 dark:text-gray-400">רחוב הרכב 123, חורה, ישראל</p>
+                <p className="text-gray-600 dark:text-gray-400">
+                  רחוב הרכב 123, חורה, ישראל
+                </p>
                 <Link
                   href="https://maps.google.com"
                   target="_blank"
@@ -101,8 +130,12 @@ export default function ContactPage() {
                 <CardTitle>טלפון</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 dark:text-gray-400">+972 (50) 123-4567</p>
-                <p className="text-gray-600 dark:text-gray-400">+972 (8) 765-4321</p>
+                <p className="text-gray-600 dark:text-gray-400">
+                  +972 (50) 123-4567
+                </p>
+                <p className="text-gray-600 dark:text-gray-400">
+                  +972 (8) 765-4321
+                </p>
               </CardContent>
             </Card>
 
@@ -114,8 +147,12 @@ export default function ContactPage() {
                 <CardTitle>אימייל</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 dark:text-gray-400">info@newdreamcar.co.il</p>
-                <p className="text-gray-600 dark:text-gray-400">support@newdreamcar.co.il</p>
+                <p className="text-gray-600 dark:text-gray-400">
+                  info@newdreamcar.co.il
+                </p>
+                <p className="text-gray-600 dark:text-gray-400">
+                  support@newdreamcar.co.il
+                </p>
               </CardContent>
             </Card>
 
@@ -127,8 +164,12 @@ export default function ContactPage() {
                 <CardTitle>שעות פעילות</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 dark:text-gray-400">א&lsquo;-ה&apos;: 9:00 - 19:00</p>
-                <p className="text-gray-600 dark:text-gray-400">ו&apos;: 9:00 - 14:00</p>
+                <p className="text-gray-600 dark:text-gray-400">
+                  א&lsquo;-ה&apos;: 9:00 - 19:00
+                </p>
+                <p className="text-gray-600 dark:text-gray-400">
+                  ו&apos;: 9:00 - 14:00
+                </p>
                 <p className="text-gray-600 dark:text-gray-400">שבת: סגור</p>
               </CardContent>
             </Card>
@@ -141,11 +182,12 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <div>
+            <div className="order-2 md:order-1">
               <div className="mb-8">
                 <h2 className="text-3xl font-bold mb-4">שלח לנו הודעה</h2>
                 <p className="text-gray-600 dark:text-gray-400">
-                  מלא את הטופס להלן ואנו נחזור אליך בהקדם האפשרי. אנו מתחייבים להגיב לכל פניה תוך 24 שעות.
+                  מלא את הטופס להלן ואנו נחזור אליך בהקדם האפשרי. אנו מתחייבים
+                  להגיב לכל פניה תוך 24 שעות.
                 </p>
               </div>
 
@@ -156,11 +198,15 @@ export default function ContactPage() {
                       <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 dark:text-green-300 mb-4">
                         <CheckCircle className="h-8 w-8" />
                       </div>
-                      <h3 className="text-xl font-bold mb-2">תודה על פנייתך!</h3>
+                      <h3 className="text-xl font-bold mb-2">
+                        תודה על פנייתך!
+                      </h3>
                       <p className="text-gray-600 dark:text-gray-400 mb-4">
                         קיבלנו את הודעתך ונחזור אליך בהקדם האפשרי.
                       </p>
-                      <Button onClick={() => setIsSubmitted(false)}>שלח הודעה נוספת</Button>
+                      <Button onClick={() => setIsSubmitted(false)}>
+                        שלח הודעה נוספת
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -168,7 +214,10 @@ export default function ContactPage() {
                 <Card className="border-0 shadow-lg">
                   <CardContent className="pt-6">
                     <Form {...form}>
-                      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                      <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="space-y-6"
+                      >
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <FormField
                             control={form.control}
@@ -177,7 +226,10 @@ export default function ContactPage() {
                               <FormItem>
                                 <FormLabel>שם מלא</FormLabel>
                                 <FormControl>
-                                  <Input placeholder="הזן את שמך המלא" {...field} />
+                                  <Input
+                                    placeholder="הזן את שמך המלא"
+                                    {...field}
+                                  />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -190,7 +242,10 @@ export default function ContactPage() {
                               <FormItem>
                                 <FormLabel>אימייל</FormLabel>
                                 <FormControl>
-                                  <Input placeholder="הזן את כתובת האימייל שלך" {...field} />
+                                  <Input
+                                    placeholder="הזן את כתובת האימייל שלך"
+                                    {...field}
+                                  />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -205,66 +260,8 @@ export default function ContactPage() {
                             <FormItem>
                               <FormLabel>טלפון</FormLabel>
                               <FormControl>
-                                <Input placeholder="הזן את מספר הטלפון שלך" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
-                          name="subject"
-                          render={({ field }) => (
-                            <FormItem className="space-y-3">
-                              <FormLabel>נושא הפנייה</FormLabel>
-                              <FormControl>
-                                <RadioGroup
-                                  onValueChange={field.onChange}
-                                  defaultValue={field.value}
-                                  className="flex flex-col space-y-1"
-                                >
-                                  <FormItem className="flex items-center space-x-3 space-y-0">
-                                    <FormControl>
-                                      <RadioGroupItem value="purchase" />
-                                    </FormControl>
-                                    <FormLabel className="font-normal mr-2">רכישת רכב</FormLabel>
-                                  </FormItem>
-                                  <FormItem className="flex items-center space-x-3 space-y-0">
-                                    <FormControl>
-                                      <RadioGroupItem value="leasing" />
-                                    </FormControl>
-                                    <FormLabel className="font-normal mr-2">ליסינג</FormLabel>
-                                  </FormItem>
-                                  <FormItem className="flex items-center space-x-3 space-y-0">
-                                    <FormControl>
-                                      <RadioGroupItem value="service" />
-                                    </FormControl>
-                                    <FormLabel className="font-normal mr-2">שירות לקוחות</FormLabel>
-                                  </FormItem>
-                                  <FormItem className="flex items-center space-x-3 space-y-0">
-                                    <FormControl>
-                                      <RadioGroupItem value="other" />
-                                    </FormControl>
-                                    <FormLabel className="font-normal mr-2">אחר</FormLabel>
-                                  </FormItem>
-                                </RadioGroup>
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
-                          name="message"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>הודעה</FormLabel>
-                              <FormControl>
-                                <Textarea
-                                  placeholder="כתוב את הודעתך כאן..."
-                                  className="resize-none min-h-[120px]"
+                                <Input
+                                  placeholder="הזן את מספר הטלפון שלך"
                                   {...field}
                                 />
                               </FormControl>
@@ -272,6 +269,78 @@ export default function ContactPage() {
                             </FormItem>
                           )}
                         />
+
+                        {/* נושא הפנייה - النقاط على اليمين والرسالة أسفلها */}
+                        <div className="flex flex-col gap-4">
+                          <FormField
+                            control={form.control}
+                            name="subject"
+                            render={({ field }) => (
+                              <FormItem className="space-y-3">
+                                <FormLabel>נושא הפנייה</FormLabel>
+                                <FormControl>
+                                  <RadioGroup
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                    className="flex flex-col items-end space-y-2"
+                                  >
+                                    <FormItem className="flex flex-row-reverse items-center gap-2">
+                                      <FormControl>
+                                        <RadioGroupItem value="purchase" />
+                                      </FormControl>
+                                      <FormLabel className="font-normal">
+                                        רכישת רכב
+                                      </FormLabel>
+                                    </FormItem>
+                                    <FormItem className="flex flex-row-reverse items-center gap-2">
+                                      <FormControl>
+                                        <RadioGroupItem value="leasing" />
+                                      </FormControl>
+                                      <FormLabel className="font-normal">
+                                        ליסינג
+                                      </FormLabel>
+                                    </FormItem>
+                                    <FormItem className="flex flex-row-reverse items-center gap-2">
+                                      <FormControl>
+                                        <RadioGroupItem value="service" />
+                                      </FormControl>
+                                      <FormLabel className="font-normal">
+                                        שירות לקוחות
+                                      </FormLabel>
+                                    </FormItem>
+                                    <FormItem className="flex flex-row-reverse items-center gap-2">
+                                      <FormControl>
+                                        <RadioGroupItem value="other" />
+                                      </FormControl>
+                                      <FormLabel className="font-normal">
+                                        אחר
+                                      </FormLabel>
+                                    </FormItem>
+                                  </RadioGroup>
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+
+                          <FormField
+                            control={form.control}
+                            name="message"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>הודעה</FormLabel>
+                                <FormControl>
+                                  <Textarea
+                                    placeholder="כתוב את הודעתך כאן..."
+                                    className="resize-none min-h-[120px]"
+                                    {...field}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
 
                         <Button type="submit" className="w-full">
                           שלח הודעה
@@ -284,17 +353,22 @@ export default function ContactPage() {
             </div>
 
             {/* Map and Social Media */}
-            <div className="space-y-8">
-              {/* Map */}
+            <div className="space-y-8 order-1 md:order-2">
+              {/* Map אמיתי */}
               <div>
                 <h2 className="text-3xl font-bold mb-4">המיקום שלנו</h2>
                 <div className="relative h-[400px] rounded-xl overflow-hidden shadow-lg">
-                  <Image
-                    src="/huramap.png?height=400&width=600&text=Google+Map"
-                    alt="מפת מיקום"
-                    fill
-                    className="object-cover"
-                  />
+                  <iframe
+                    title="Google Map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3382.285964624728!2d34.934927!3d31.260218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502b2e7e7e7e7e7%3A0x123456789abcdef!2z16jXkdeV16jXkdeV!5e0!3m2!1she!2sil!4v1680000000000!5m2!1she!2sil"
+                    width="100%"
+                    height="400"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full"
+                  ></iframe>
                 </div>
               </div>
 
@@ -337,51 +411,69 @@ export default function ContactPage() {
       <section className="py-16 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <Badge className="bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-100 mb-4">שאלות נפוצות</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">יש לך שאלות?</h2>
+            <Badge className="bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-100 mb-4">
+              שאלות נפוצות
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              יש לך שאלות?
+            </h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              אלו השאלות הנפוצות ביותר שאנו מקבלים. אם לא מצאת תשובה לשאלתך, אל תהסס לפנות אלינו.
+              אלו השאלות הנפוצות ביותר שאנו מקבלים. אם לא מצאת תשובה לשאלתך, אל
+              תהסס לפנות אלינו.
             </p>
           </div>
 
           <div className="max-w-3xl mx-auto">
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
-                <AccordionTrigger>מהם תנאי המימון שאתם מציעים?</AccordionTrigger>
+                <AccordionTrigger>
+                  מהם תנאי המימון שאתם מציעים?
+                </AccordionTrigger>
                 <AccordionContent>
-                  אנו מציעים מגוון אפשרויות מימון עם ריביות אטרקטיביות ותנאים גמישים. התנאים משתנים בהתאם לסוג הרכב,
-                  גילו, מחירו והיסטוריית האשראי שלך. צוות המימון שלנו ישמח לעזור לך למצוא את האפשרות המתאימה ביותר
-                  עבורך.
+                  אנו מציעים מגוון אפשרויות מימון עם ריביות אטרקטיביות ותנאים
+                  גמישים. התנאים משתנים בהתאם לסוג הרכב, גילו, מחירו והיסטוריית
+                  האשראי שלך. צוות המימון שלנו ישמח לעזור לך למצוא את האפשרות
+                  המתאימה ביותר עבורך.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">
-                <AccordionTrigger>האם אתם מציעים אחריות על רכבים משומשים?</AccordionTrigger>
+                <AccordionTrigger>
+                  האם אתם מציעים אחריות על רכבים משומשים?
+                </AccordionTrigger>
                 <AccordionContent>
-                  כן, אנו מציעים אחריות על כל הרכבים המשומשים שלנו. תקופת האחריות משתנה בהתאם לגיל הרכב ומצבו, אך בדרך
-                  כלל היא נעה בין 6 ל-12 חודשים. האחריות מכסה תקלות מכניות ואלקטרוניות עיקריות.
+                  כן, אנו מציעים אחריות על כל הרכבים המשומשים שלנו. תקופת
+                  האחריות משתנה בהתאם לגיל הרכב ומצבו, אך בדרך כלל היא נעה בין 6
+                  ל-12 חודשים. האחריות מכסה תקלות מכניות ואלקטרוניות עיקריות.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-3">
                 <AccordionTrigger>כיצד אוכל לקבוע נסיעת מבחן?</AccordionTrigger>
                 <AccordionContent>
-                  ניתן לקבוע נסיעת מבחן בקלות דרך אתר האינטרנט שלנו, בטלפון או בביקור במגרש המכוניות שלנו. אנו ממליצים
-                  לתאם מראש כדי להבטיח שהרכב שמעניין אותך יהיה זמין. נסיעות המבחן בדרך כלל נמשכות כ-30 דקות.
+                  ניתן לקבוע נסיעת מבחן בקלות דרך אתר האינטרנט שלנו, בטלפון או
+                  בביקור במגרש המכוניות שלנו. אנו ממליצים לתאם מראש כדי להבטיח
+                  שהרכב שמעניין אותך יהיה זמין. נסיעות המבחן בדרך כלל נמשכות
+                  כ-30 דקות.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-4">
-                <AccordionTrigger>האם אתם מקבלים רכבים בטרייד-אין?</AccordionTrigger>
+                <AccordionTrigger>
+                  האם אתם מקבלים רכבים בטרייד-אין?
+                </AccordionTrigger>
                 <AccordionContent>
-                  כן, אנו מקבלים רכבים בטרייד-אין. אנו מציעים הערכה הוגנת לרכב הישן שלך בהתבסס על מצבו, גילו,
-                  הקילומטראז&apos; וערך השוק הנוכחי. ההערכה ניתנת ללא התחייבות וניתן להשתמש בערך הרכב כחלק מהתשלום עבור הרכב
-                  החדש.
+                  כן, אנו מקבלים רכבים בטרייד-אין. אנו מציעים הערכה הוגנת לרכב
+                  הישן שלך בהתבסס על מצבו, גילו, הקילומטראז&apos; וערך השוק
+                  הנוכחי. ההערכה ניתנת ללא התחייבות וניתן להשתמש בערך הרכב כחלק
+                  מהתשלום עבור הרכב החדש.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-5">
                 <AccordionTrigger>מהו תהליך הרכישה אצלכם?</AccordionTrigger>
                 <AccordionContent>
-                  תהליך הרכישה שלנו פשוט ושקוף. לאחר שבחרת רכב ואולי ערכת נסיעת מבחן, הצוות שלנו יעבור איתך על כל
-                  האפשרויות הזמינות, כולל מימון וביטוח. לאחר שהגעת להחלטה, אנו מטפלים בכל העבודה הניירת הנדרשת ומסייעים
-                  בהעברת הבעלות. בדרך כלל, ניתן להשלים את התהליך תוך יום או יומיים.
+                  תהליך הרכישה שלנו פשוט ושקוף. לאחר שבחרת רכב ואולי ערכת נסיעת
+                  מבחן, הצוות שלנו יעבור איתך על כל האפשרויות הזמינות, כולל
+                  מימון וביטוח. לאחר שהגעת להחלטה, אנו מטפלים בכל העבודה הניירת
+                  הנדרשת ומסייעים בהעברת הבעלות. בדרך כלל, ניתן להשלים את התהליך
+                  תוך יום או יומיים.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -389,14 +481,15 @@ export default function ContactPage() {
         </div>
       </section>
 
-     {/* CTA Section */}
+      {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-cyan-600 to-cyan-800 text-white dark:from-gray-800 dark:to-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             מוכנים לצעד הבא?
           </h2>
           <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
-            בין אם אתם מחפשים רכב חדש, רכב משומש או אפשרויות מימון, אנחנו כאן כדי לעזור. צרו קשר עוד היום ונשמח לענות על כל שאלה.
+            בין אם אתם מחפשים רכב חדש, רכב משומש או אפשרויות מימון, אנחנו כאן
+            כדי לעזור. צרו קשר עוד היום ונשמח לענות על כל שאלה.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button
@@ -415,5 +508,5 @@ export default function ContactPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }

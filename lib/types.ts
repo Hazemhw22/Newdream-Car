@@ -1,11 +1,11 @@
 export interface Car {
   description: string;
-  features: string[]; // بدل never[] عشان تمثل ميزات السيارة
-  image: string; // أضف هذه الخاصية
+  features: string[];
+  image: string;
   images: string[];
   name: string;
   title: string;
-  id: string | number; // بدل string فقط
+  id: string | number;
   created_at: string;
   year: number;
   status: string;
@@ -13,7 +13,7 @@ export interface Car {
   sale_price: number;
   market_price: number;
   value_price: number;
-  priceRange: any; // ممكن تخصص النوع لو تعرف شكله
+  priceRange: any;
   kilometers: number;
   provider: string;
   brand: string;
@@ -23,4 +23,13 @@ export interface Car {
     address: string;
     phone: string;
   };
+  colors?: {
+    color: string;
+    images: string[];
+  }[];
+  show_in_sales?: boolean;
+  show_in_featured?: boolean;
+  show_in_new_car?: boolean;
+  show_in_used_car?: boolean;
+  show_in_luxery_car?: boolean;
 }

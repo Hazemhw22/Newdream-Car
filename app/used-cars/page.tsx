@@ -31,6 +31,13 @@ export default function UsedCarsPage() {
   const [carType, setCarType] = useState<string | null>(null);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
 
+  // Add year filter state
+  const [year, setYear] = useState("all");
+  // Compute available years from cars data
+  const years = Array.from(
+    new Set(cars.map((car) => car.year).filter((y) => typeof y === "number"))
+  ).sort((a, b) => b - a);
+
   useEffect(() => {
     const fetchCars = async () => {
       setLoading(true);
@@ -114,8 +121,8 @@ export default function UsedCarsPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
 
-      <main className="pt-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <main className="pt-20 px-4 sm:px-6 lg:px-8 flex-1">
+        <div className="max-w-7xl mx-auto pb-10">
           {/* Banner with improved responsive design */}
           <section className="relative bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-800 dark:to-cyan-700 rounded-xl overflow-hidden">
             <div className="absolute inset-0 opacity-20">
@@ -202,19 +209,19 @@ export default function UsedCarsPage() {
             </div>
           </div>
 
-          {/* Filters - Show conditionally on mobile */}
-          <div className={`${showMobileFilters ? "block" : "hidden md:block"}`}>
-            <SearchFilters
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              brand={brand}
-              setBrand={setBrand}
-              priceRange={priceRange}
-              setPriceRange={setPriceRange}
-              sortBy={sortBy}
-              setSortBy={setSortBy}
-            />
-          </div>
+          <SearchFilters
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            brand={brand}
+            setBrand={setBrand}
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            year={year}
+            setYear={setYear}
+            years={years}
+          />
 
           {/* Result Count */}
           <div className="mb-4 mt-6">

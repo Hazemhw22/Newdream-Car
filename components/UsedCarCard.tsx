@@ -22,7 +22,6 @@ interface UsedCarCardProps {
   };
 }
 
-
 export default function UsedCarCard({ car }: UsedCarCardProps) {
   const [isLiked, setIsLiked] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
@@ -57,13 +56,15 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
         <div className="relative h-40 sm:h-48 lg:h-64 bg-gray-100 dark:bg-gray-700">
           <Image
             src={
-              process.env.NEXT_PUBLIC_SUPABASE_URL +
-                "/storage/v1/object/public/cars/" +
-                car.images[0] || ""
+              car.images && car.images[0]
+                ? process.env.NEXT_PUBLIC_SUPABASE_URL +
+                  "/storage/v1/object/public/cars/" +
+                  car.images[0]
+                : "/placeholder.svg"
             }
             alt={car.name}
             fill
-            style={{ objectFit: "cover" }}
+            className="object-contain rounded-t-xl"
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>

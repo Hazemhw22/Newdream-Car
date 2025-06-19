@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 import {
   Dialog,
   DialogContent,
@@ -9,9 +9,9 @@ import {
   DialogTitle,
   DialogOverlay,
   DialogClose,
-} from '@/components/ui/dialog';
-import { PhoneCall, MessageCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+} from "@/components/ui/dialog";
+import { PhoneCall, MessageCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -33,16 +33,19 @@ export default function ContactModal({
   mileage,
 }: ContactModalProps) {
   const formatPrice = (price: number) =>
-    new Intl.NumberFormat('he-IL', {
-      style: 'currency',
-      currency: 'ILS',
+    new Intl.NumberFormat("he-IL", {
+      style: "currency",
+      currency: "ILS",
       minimumFractionDigits: 0,
     }).format(price);
 
   // إعداد البيانات
-  const phoneNumber = '0501234567';
+  const phoneNumber = "0501234567";
   const formattedPhone = `tel:${phoneNumber}`;
-  const whatsappLink = `https://wa.me/972${phoneNumber.replace(/^0/, '')}?text=שלום, אני מעוניין בפרטים על הרכב ${carName}`;
+  const whatsappLink = `https://wa.me/972${phoneNumber.replace(
+    /^0/,
+    ""
+  )}?text=שלום, אני מעוניין בפרטים על הרכב ${carName}`;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -64,7 +67,7 @@ export default function ContactModal({
                   "/storage/v1/object/public/cars/" +
                   carImages[0] || ""
               }
-              alt={carName}
+              alt={carName || "תמונת רכב"}
               fill
               className="object-cover"
             />

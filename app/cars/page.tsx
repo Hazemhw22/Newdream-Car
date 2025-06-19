@@ -1,26 +1,39 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Header from "@/components/Header";
-import SearchFilters from "@/components/SearchFilters";
 import CarCard from "@/components/CarCard";
-import { getSupabaseBrowserClient } from "../../lib/supabaseClient";
-import { Car, Truck, Zap, CircleDot, Filter } from "lucide-react";
-import Image from "next/image";
+import SearchFilters from "@/components/SearchFilters";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import type { Car as CarType } from "../../lib/types";
+import {
+  Car as CarIcon,
+  Truck,
+  Zap,
+  CircleDot,
+  Filter,
+  Search,
+} from "lucide-react";
+import Image from "next/image";
+import type { Car } from "@/lib/types";
+import { getSupabaseBrowserClient } from "@/lib/supabaseClient";
 
 const carTypes = [
   { name: "חשמלי", icon: Zap },
-  { name: "רכב פרטי", icon: Car },
+  { name: "רכב פרטי", icon: CarIcon },
   { name: "רכב מסחרי", icon: Truck },
-  { name: "רכב שטח", icon: Car },
+  { name: "רכב שטח", icon: CarIcon },
   { name: "היברידי", icon: CircleDot },
 ];
 
-export default function NewCarsPage() {
-  const [cars, setCars] = useState<CarType[]>([]);
+
+
+const sortOptions = [
+  { label: "מחיר מהגבוה לנמוך", value: "price-high" },
+  { label: "שם", value: "name" },
+];
+
+export default function CarsPage() {
+  const [cars, setCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,13 +45,6 @@ export default function NewCarsPage() {
   const [carType, setCarType] = useState<string | null>(null);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
 
-  // Add year filter state
-  const [year, setYear] = useState<string>("all");
-  // Compute available years from cars data
-  const years = Array.from(
-    new Set(cars.map((car) => car.year).filter((y) => typeof y === "number"))
-  ).sort((a, b) => b - a);
-
   useEffect(() => {
     const fetchCars = async () => {
       setLoading(true);
@@ -47,15 +53,14 @@ export default function NewCarsPage() {
         const { data, error } = await supabase
           .from("cars")
           .select("*")
-          .eq("status", "new")
           .order("created_at", { ascending: false })
-          .returns<[]>(); // ✅ حدد النوع هنا
+          .returns<Car[]>();
 
         if (error) {
           setError(error.message);
-          setCars([]); // reset
+          setCars([]);
         } else {
-          setCars(data || []); // ✅ بدون خطأ الآن
+          setCars(data || []);
         }
       } catch (err: any) {
         setError(err.message || "שגיאה בטעינת הנתונים");
@@ -66,59 +71,69 @@ export default function NewCarsPage() {
 
     fetchCars();
   }, []);
-  
 
   useEffect(() => {
     setDisplayedCars(12);
   }, [searchTerm, brand, priceRange, sortBy, carType]);
 
-  const filteredCars = cars
-    .filter((car) => {
-      if (
-        searchTerm &&
-        !car.name?.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-        return false;
-      if (brand !== "all" && car.brand?.toLowerCase() !== brand.toLowerCase())
-        return false;
+  const brands = useMemo(
+    () => Array.from(new Set(cars.map((car) => car.brand))).filter(Boolean),
+    [cars]
+  );
+  const years = useMemo(
+    () =>
+      Array.from(new Set(cars.map((car) => car.year)))
+        .filter(Boolean)
+        .sort((a, b) => b - a),
+    [cars]
+  );
 
-      if (priceRange !== "all") {
-        const [min, max] = priceRange
-          .split("-")
-          .map(
-            (p) =>
-              Number.parseInt(p.replace("+", "")) || Number.POSITIVE_INFINITY
-          );
+  const filteredCars = useMemo(() => {
+    return cars
+      .filter((car) => {
         if (
-          car.sale_price < min ||
-          (max !== Number.POSITIVE_INFINITY && car.sale_price > max)
+          searchTerm &&
+          !(
+            car.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            car.brand?.toLowerCase().includes(searchTerm.toLowerCase())
+          )
         )
           return false;
-      }
-
-      if (carType && car.type?.toLowerCase() !== carType.toLowerCase())
-        return false;
-
-      return true;
-    })
-    .sort((a, b) => {
-      switch (sortBy) {
-        case "price-low":
-          return a.sale_price - b.sale_price;
-        case "price-high":
-          return b.sale_price - a.sale_price;
-        case "name":
-          return a.name.localeCompare(b.name);
-        default:
-          return 0;
-      }
-    });
+        if (brand !== "all" && car.brand?.toLowerCase() !== brand.toLowerCase())
+          return false;
+        if (priceRange !== "all") {
+          const [min, max] = priceRange
+            .split("-")
+            .map((p) =>
+              p === "+" ? Number.POSITIVE_INFINITY : Number.parseInt(p)
+            );
+          if (
+            car.sale_price < min ||
+            (max !== Number.POSITIVE_INFINITY && car.sale_price > max)
+          )
+            return false;
+        }
+        if (carType && car.type?.toLowerCase() !== carType.toLowerCase())
+          return false;
+        return true;
+      })
+      .sort((a, b) => {
+        switch (sortBy) {
+          case "price-low":
+            return a.sale_price - b.sale_price;
+          case "price-high":
+            return b.sale_price - a.sale_price;
+          case "name":
+            return a.name.localeCompare(b.name);
+          default:
+            return 0;
+        }
+      });
+  }, [cars, searchTerm, brand, priceRange, sortBy, carType]);
 
   const visibleCars = filteredCars.slice(0, displayedCars);
 
-  const loadMore = () => {
-    setDisplayedCars((prev) => prev + 12);
-  };
+  const loadMore = () => setDisplayedCars((prev) => prev + 12);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -126,7 +141,7 @@ export default function NewCarsPage() {
 
       <main className="pt-20 px-4 sm:px-6 lg:px-8 flex-1">
         <div className="max-w-7xl mx-auto pb-10">
-          {/* Banner with improved responsive design */}
+          {/* Banner */}
           <section className="relative bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-800 dark:to-cyan-700 rounded-xl overflow-hidden">
             <div className="absolute inset-0 opacity-20">
               <Image
@@ -139,10 +154,10 @@ export default function NewCarsPage() {
             </div>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 relative z-10 text-center">
               <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-                רכבים חדשים
+                כל הרכבים
               </h1>
               <p className="text-lg md:text-2xl text-white opacity-90 max-w-2xl mx-auto">
-                מצאו רכבים חדשים מהיבואנים המובילים עם אחריות יצרן מלאה
+                מצאו רכב חדש או משומש שמתאים בדיוק לכם
               </p>
             </div>
           </section>
@@ -159,7 +174,7 @@ export default function NewCarsPage() {
             </Button>
           </div>
 
-          {/* Car Type Filters - Improved responsive design */}
+          {/* Car Type Filters */}
           <div
             className={`my-6 ${
               showMobileFilters ? "block" : "hidden md:block"
@@ -212,10 +227,8 @@ export default function NewCarsPage() {
             </div>
           </div>
 
-          {/* Search Filters */}
-          <div
-            className={`mt-6 ${showMobileFilters ? "block" : "hidden md:block"}`}
-          >
+          {/* Filters - Show conditionally on mobile */}
+          <div className={`${showMobileFilters ? "block" : "hidden md:block"}`}>
             <SearchFilters
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
@@ -225,11 +238,11 @@ export default function NewCarsPage() {
               setPriceRange={setPriceRange}
               sortBy={sortBy}
               setSortBy={setSortBy}
-              year={year}
-              setYear={setYear}
+              year={""}
+              setYear={() => {}}
               years={years}
             />
-          </div>
+           
 
           {/* Result Count */}
           <div className="mb-4 mt-6">
@@ -250,62 +263,21 @@ export default function NewCarsPage() {
             </div>
           </div>
 
-          {/* Loading State */}
-          {loading && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {Array(8)
-                .fill(0)
-                .map((_, i) => (
-                  <div
-                    key={i}
-                    className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow"
-                  >
-                    <Skeleton className="h-48 w-full" />
-                    <div className="p-4">
-                      <Skeleton className="h-4 w-1/3 mb-2" />
-                      <Skeleton className="h-6 w-3/4 mb-4" />
-                      <Skeleton className="h-4 w-full mb-2" />
-                      <Skeleton className="h-4 w-full mb-2" />
-                      <Skeleton className="h-4 w-2/3 mb-4" />
-                      <div className="pt-4 border-t">
-                        <Skeleton className="h-6 w-1/2 mb-2" />
-                        <div className="flex gap-2 mt-4">
-                          <Skeleton className="h-10 w-full" />
-                          <Skeleton className="h-10 w-full" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          )}
-
-          {/* Car Grid - Improved responsive design */}
-          {!loading && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {visibleCars.map((car) => (
-                <CarCard
-                  key={car.id}
-                  car={{
-                    id: car.id.toString(),
-                    title: car.title || "CAR NAME",
-                    brand: car.brand,
-                    sale_price: car.sale_price,
-                    originalPrice: car.market_price,
-                    images: car.images || "/placeholder-car.jpg",
-                    features: car.features || [],
-                    isBestChoice: false,
-                    year: car.year,
-                    kilometers: car.kilometers,
-                    award: car.year === 2025 ? "רכב השנה" : undefined,
-                  }}
-                />
-              ))}
-            </div>
-          )}
+          {/* Car Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {visibleCars.map((car) => (
+              <CarCard
+                key={car.id?.toString()}
+                car={{
+                  ...car,
+                  id: car.id.toString(),
+                }}
+              />
+            ))}
+          </div>
 
           {/* Load More */}
-          {!loading && visibleCars.length < filteredCars.length && (
+          {visibleCars.length < filteredCars.length && (
             <div className="text-center mt-8 pb-8">
               <Button
                 onClick={loadMore}
@@ -320,10 +292,10 @@ export default function NewCarsPage() {
           {!loading && filteredCars.length === 0 && (
             <div className="text-center py-16 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
-                <Car className="h-8 w-8 text-gray-500 dark:text-gray-400" />
+                <CarIcon className="h-8 w-8 text-gray-500 dark:text-gray-400" />
               </div>
               <p className="text-xl text-gray-600 dark:text-gray-300">
-                לא נמצאו רכבים חדשים התואמים את הקריטריונים שלך.
+                לא נמצאו רכבים התואמים את הקריטריונים שלך.
               </p>
               <p className="text-gray-500 dark:text-gray-400 mt-2 max-w-md mx-auto">
                 נסה להתאים את המסננים או מונחי החיפוש כדי למצוא רכבים נוספים.
@@ -359,6 +331,7 @@ export default function NewCarsPage() {
               </Button>
             </div>
           )}
+          </div>
         </div>
       </main>
     </div>
