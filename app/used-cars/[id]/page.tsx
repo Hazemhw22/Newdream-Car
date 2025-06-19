@@ -2,11 +2,7 @@ import { createServerSupabaseClient } from "../../../lib/supabaseClient";
 import CarDetailsClientPage from "./UsedCarDetailsClientPage";
 import { notFound } from "next/navigation";
 
-interface Params {
-  params: { id: string };
-}
-
-export default async function CarPage({ params }: Params) {
+export default async function CarPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const supabase = createServerSupabaseClient();
 
@@ -20,5 +16,5 @@ export default async function CarPage({ params }: Params) {
     notFound();
   }
 
-  return <CarDetailsClientPage params={{ id }} />;
+  return <CarDetailsClientPage car={car} />;
 }

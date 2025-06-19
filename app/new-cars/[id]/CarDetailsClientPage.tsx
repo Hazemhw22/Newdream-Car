@@ -220,13 +220,13 @@ export default function CarDetailsClientPage({ car }: { car: Car }) {
             {/* تبويب اللون */}
             <TabsContent value="color" className="p-4">
               {car.colors && car.colors.length > 0 ? (
-                <div className="flex flex-col items-center gap-4">
+                <div className="flex flex-col items-center gap-2">
                   <CarColorPicker
                     colorOptions={car.colors}
                     selectedColor={selectedColor}
                     onSelectColor={handleColorSelect}
                   />
-                  <div className="w-full flex justify-center">
+                  <div className="w-full flex justify-center mt-2">
                     {(() => {
                       // ابحث عن اللون المختار أو الأول كافترتي
                       const selected =
@@ -329,11 +329,6 @@ export default function CarDetailsClientPage({ car }: { car: Car }) {
               </ul>
             </TabsContent>
           </Tabs>
-
-          {/* معلومات البائع
-          <SellerInfoCard
-            provider={car.providers?.name || car.provider || "יבואן רשמי"}
-          /> */}
 
           {/* السيارات المقترحة */}
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">

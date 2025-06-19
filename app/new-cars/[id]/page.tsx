@@ -2,11 +2,7 @@ import { createServerSupabaseClient } from "../../../lib/supabaseClient";
 import CarDetailsClientPage from "./CarDetailsClientPage";
 import { notFound } from "next/navigation";
 
-interface PageProps {
-  params: { id: string };
-}
-
-export default async function CarPage({ params }: PageProps) {
+export default async function CarPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const supabase = createServerSupabaseClient();
 
