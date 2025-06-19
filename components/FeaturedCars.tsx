@@ -28,7 +28,12 @@ export default function FeaturedCars({ cars }: FeaturedCarsProps) {
         {featuredCars.map((car) => (
           <div key={car.id.toString()} className="relative">
             <CarCard
-              car={{ ...car, id: car.id.toString() }}
+              car={{ 
+                ...car, 
+                id: car.id.toString(), 
+                title: car.title ?? car.name,
+                images: car.images ?? []
+              }}
               showMainTag={false}
             />
             <Badge className="absolute top-3 right-3 bg-cyan-700 text-white">

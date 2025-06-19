@@ -26,7 +26,15 @@ export default function HotSales({ cars }: HotSalesProps) {
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {hotSalesCars.map((car) => (
-          <CarCard key={String(car.id)} car={{ ...car, id: String(car.id) }} />
+          <CarCard
+            key={String(car.id)}
+            car={{
+              ...car,
+              id: String(car.id),
+              title: car.title ?? car.name ?? "רכב ללא שם",
+              images: car.images ?? (car.image ? [car.image] : []),
+            }}
+          />
         ))}
       </div>
     </section>

@@ -271,6 +271,8 @@ export default function CarsPage() {
                 car={{
                   ...car,
                   id: car.id.toString(),
+                  title: car.title ?? car.name ?? "רכב ללא שם",
+                  images: car.images ?? (car.image ? [car.image] : []),
                 }}
               />
             ))}

@@ -26,7 +26,12 @@ export default function LuxuryCars({ cars }: LuxuryCarsProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {luxuryCars.map((car) => (
           <div key={car.id} className="relative">
-            <CarCard car={{ ...car, id: String(car.id) }} />
+            <CarCard car={{ 
+              ...car, 
+              id: String(car.id), 
+              title: car.title ?? car.name, // fallback to car.name if title is undefined
+              images: car.images ?? [] // ensure images is always a string[]
+            }} />
             <Badge className="absolute top-3 right-3 bg-purple-700 text-white">
               יוקרה
             </Badge>

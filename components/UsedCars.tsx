@@ -28,7 +28,12 @@ export default function UsedCars({ cars }: UsedCarsProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {usedCars.map((car) => (
           <div key={car.id?.toString()} className="relative">
-            <CarCard car={{ ...car, id: car.id.toString() }} />
+            <CarCard car={{ 
+              ...car, 
+              id: car.id.toString(), 
+              title: car.title ?? car.name, // fallback to car.name if title is undefined
+              images: car.images ?? [], // ensure images is always a string[]
+            }} />
             <Badge className="absolute top-3 right-3 bg-yellow-500 text-white">
               משומש
             </Badge>
