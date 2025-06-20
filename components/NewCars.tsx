@@ -3,7 +3,7 @@ import React from "react";
 import { Car } from "@/lib/types";
 import CarCard from "@/components/CarCard";
 import { Badge } from "@/components/ui/badge";
-
+// t
 interface NewCarsProps {
   cars: Car[];
 }
