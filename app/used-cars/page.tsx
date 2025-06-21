@@ -150,72 +150,88 @@ export default function UsedCarsPage() {
             </Button>
           </div>
 
-          {/* Car Type Filters - Improved responsive design */}
-          <div
-            className={`my-6 ${
-              showMobileFilters ? "block" : "hidden md:block"
-            }`}
-          >
-            <h2 className="text-lg font-semibold mb-3 text-right">סוג רכב</h2>
-            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4">
-              {carTypes.map((type) => {
-                const Icon = type.icon;
-                const isActive = carType === type.value;
-                return (
-                  <button
-                    key={type.value}
-                    onClick={() =>
-                      setCarType(carType === type.value ? null : type.value)
-                    }
-                    className={`flex flex-col items-center justify-center p-3 sm:p-6 rounded-lg transition-all duration-200 ${
-                      isActive
-                        ? "bg-cyan-100 dark:bg-cyan-800 shadow-md scale-105"
-                        : "bg-white dark:bg-gray-800 hover:bg-cyan-50 dark:hover:bg-cyan-900"
-                    }`}
-                  >
-                    <div
-                      className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center mb-2 transition-colors duration-200 ${
+          {/* جميع الفلاتر (نوع السيارة + SearchFilters) */}
+          {/*
+  في الجوال: تظهر فقط عند الضغط على زر الفلتر (showMobileFilters)
+  في الديسكتوب: تظهر دائماً (md:block)
+*/}
+          <div className={`${showMobileFilters ? "block" : "hidden"} md:block`}>
+            {/* Car Type Filters */}
+            <div className="my-6">
+              <h2 className="text-lg font-semibold mb-3 text-right">סוג רכב</h2>
+              <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4">
+                {carTypes.map((type) => {
+                  const Icon = type.icon;
+                  const isActive = carType === type.value;
+                  return (
+                    <button
+                      key={type.value}
+                      onClick={() =>
+                        setCarType(carType === type.value ? null : type.value)
+                      }
+                      className={`flex flex-col items-center justify-center p-3 sm:p-6 rounded-lg transition-all duration-200 ${
                         isActive
-                          ? "bg-cyan-200 dark:bg-cyan-700"
-                          : "bg-gray-100 dark:bg-gray-700"
+                          ? "bg-cyan-100 dark:bg-cyan-800 shadow-md scale-105"
+                          : "bg-white dark:bg-gray-800 hover:bg-cyan-50 dark:hover:bg-cyan-900"
                       }`}
                     >
-                      <Icon
-                        className={`w-6 h-6 sm:w-7 sm:h-7 ${
+                      <div
+                        className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center mb-2 transition-colors duration-200 ${
                           isActive
-                            ? "text-cyan-600 dark:text-cyan-400"
-                            : "text-gray-600 dark:text-gray-400"
+                            ? "bg-cyan-200 dark:bg-cyan-700"
+                            : "bg-gray-100 dark:bg-gray-700"
                         }`}
-                      />
-                    </div>
-                    <span
-                      className={`text-sm sm:text-base font-medium ${
-                        isActive
-                          ? "text-cyan-700 dark:text-cyan-300"
-                          : "text-gray-700 dark:text-gray-300"
-                      }`}
-                    >
-                      {type.name}
-                    </span>
-                  </button>
-                );
-              })}
+                      >
+                        <Icon
+                          className={`w-6 h-6 sm:w-7 sm:h-7 ${
+                            isActive
+                              ? "text-cyan-600 dark:text-cyan-400"
+                              : "text-gray-600 dark:text-gray-400"
+                          }`}
+                        />
+                      </div>
+                      <span
+                        className={`text-sm sm:text-base font-medium ${
+                          isActive
+                            ? "text-cyan-700 dark:text-cyan-300"
+                            : "text-gray-700 dark:text-gray-300"
+                        }`}
+                      >
+                        {type.name}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+              {/* زر إغلاق الفلاتر في الجوال */}
+              <div className="md:hidden flex justify-end mt-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowMobileFilters(false)}
+                >
+                  סגור
+                </Button>
+              </div>
+            </div>
+
+            {/* Search Filters */}
+            <div className="mt-6">
+              <SearchFilters
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                brand={brand}
+                setBrand={setBrand}
+                priceRange={priceRange}
+                setPriceRange={setPriceRange}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+                year={year}
+                setYear={setYear}
+                years={years}
+              />
             </div>
           </div>
-
-          <SearchFilters
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            brand={brand}
-            setBrand={setBrand}
-            priceRange={priceRange}
-            setPriceRange={setPriceRange}
-            sortBy={sortBy}
-            setSortBy={setSortBy}
-            year={year}
-            setYear={setYear}
-            years={years}
-          />
 
           {/* Result Count */}
           <div className="mb-4 mt-6">
@@ -274,7 +290,7 @@ export default function UsedCarsPage() {
                   key={car.id}
                   car={{
                     id: car.id,
-                    name:  car.title || "CAR NAME",
+                    name: car.title || "CAR NAME",
                     brand: car.brand,
                     price: car.sale_price,
                     originalPrice: car.market_price,
