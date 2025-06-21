@@ -175,11 +175,7 @@ export default function CarsPage() {
           </div>
 
           {/* Car Type Filters */}
-          <div
-            className={`my-6 ${
-              showMobileFilters ? "block" : "hidden md:block"
-            }`}
-          >
+          <div className={`${showMobileFilters ? "block" : "hidden"} md:block my-6`}>
             <h2 className="text-lg font-semibold mb-3 text-right">סוג רכב</h2>
             <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4">
               {carTypes.map((type) => {
@@ -225,10 +221,20 @@ export default function CarsPage() {
                 );
               })}
             </div>
+            {/* زر إغلاق الفلاتر في الجوال */}
+            <div className="md:hidden flex justify-end mt-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowMobileFilters(false)}
+              >
+                סגור
+              </Button>
+            </div>
           </div>
 
-          {/* Filters - Show conditionally on mobile */}
-          <div className={`${showMobileFilters ? "block" : "hidden md:block"}`}>
+          {/* Filters - تظهر فقط عند الضغط على زر الفلاتר في الجوال، ودائماً في الديسكتوب */}
+          <div className={`${showMobileFilters ? "block" : "hidden"} md:block`}>
             <SearchFilters
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
@@ -242,28 +248,18 @@ export default function CarsPage() {
               setYear={() => {}}
               years={years}
             />
-           
+          </div>
 
-          {/* Result Count */}
+          {/* Result Count + قائمة السيارات (تظهر دائماً) */}
           <div className="mb-4 mt-6">
             <div className="flex justify-between items-center">
               <p className="text-gray-600 dark:text-gray-400">
                 מציגים {visibleCars.length} מתוך {filteredCars.length} רכבים
               </p>
-              {showMobileFilters && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowMobileFilters(false)}
-                  className="md:hidden"
-                >
-                  סגור
-                </Button>
-              )}
             </div>
           </div>
 
-          {/* Car Grid */}
+          {/* Car Grid (تظهر دائماً) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {visibleCars.map((car) => (
               <CarCard
@@ -333,7 +329,6 @@ export default function CarsPage() {
               </Button>
             </div>
           )}
-          </div>
         </div>
       </main>
     </div>
