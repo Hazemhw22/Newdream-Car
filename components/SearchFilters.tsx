@@ -44,9 +44,9 @@ export default function SearchFilters({
           <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-400 h-4 w-4" />
           <Input
             type="text"
-            placeholder="חפש רכבים..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="חפש רכב..."
             className="pr-10 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 border border-gray-300 dark:border-gray-600"
           />
         </div>

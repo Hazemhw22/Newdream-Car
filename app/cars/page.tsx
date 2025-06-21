@@ -10,6 +10,7 @@ import {
   Truck,
   Zap,
   CircleDot,
+  CarFront,
   Filter,
   Search,
 } from "lucide-react";
@@ -18,14 +19,12 @@ import type { Car } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabaseClient";
 
 const carTypes = [
-  { name: "חשמלי", icon: Zap },
-  { name: "רכב פרטי", icon: CarIcon },
-  { name: "רכב מסחרי", icon: Truck },
-  { name: "רכב שטח", icon: CarIcon },
-  { name: "היברידי", icon: CircleDot },
+  { name: "רכב שטח", value: "SUV", icon: CarIcon },
+  { name: "היברידי", value: "HYBRID", icon: CircleDot },
+  { name: "חשמלי", value: "ELECTRIC", icon: Zap },
+  { name: "מסחרי", value: "VAN", icon: Truck },
+  { name: "רכב פרטי", value: "SEDAN", icon: CarFront },
 ];
-
-
 
 const sortOptions = [
   { label: "מחיר מהגבוה לנמוך", value: "price-high" },
@@ -113,8 +112,7 @@ export default function CarsPage() {
           )
             return false;
         }
-        if (carType && car.type?.toLowerCase() !== carType.toLowerCase())
-          return false;
+        if (carType && car.type?.toUpperCase() !== carType) return false;
         return true;
       })
       .sort((a, b) => {
@@ -180,12 +178,12 @@ export default function CarsPage() {
             <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4">
               {carTypes.map((type) => {
                 const Icon = type.icon;
-                const isActive = carType === type.name;
+                const isActive = carType === type.value;
                 return (
                   <button
-                    key={type.name}
+                    key={type.value}
                     onClick={() =>
-                      setCarType(carType === type.name ? null : type.name)
+                      setCarType(carType === type.value ? null : type.value)
                     }
                     className={`flex flex-col items-center justify-center p-3 sm:p-6 rounded-lg transition-all duration-200 ${
                       isActive
@@ -233,7 +231,7 @@ export default function CarsPage() {
             </div>
           </div>
 
-          {/* Filters - تظهر فقط عند الضغط على زر الفلاتר في الجوال، ودائماً في الديسكتوب */}
+          {/* Filters */}
           <div className={`${showMobileFilters ? "block" : "hidden"} md:block`}>
             <SearchFilters
               searchTerm={searchTerm}

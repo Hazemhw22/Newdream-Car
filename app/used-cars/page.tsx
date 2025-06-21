@@ -11,11 +11,11 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const carTypes = [
-  { name: "חשמלי", icon: Zap },
-  { name: "רכב פרטי", icon: Car },
-  { name: "רכב מסחרי", icon: Truck },
-  { name: "רכב שטח", icon: Car },
-  { name: "היברידי", icon: CircleDot },
+  { name: "חשמלי", value: "ELECTRIC", icon: Zap },
+  { name: "רכב פרטי", value: "SEDAN", icon: Car },
+  { name: "רכב מסחרי", value: "VAN", icon: Truck },
+  { name: "רכב שטח", value: "SUV", icon: Car },
+  { name: "היברידי", value: "HYBRID", icon: CircleDot },
 ];
 
 export default function UsedCarsPage() {
@@ -70,33 +70,39 @@ export default function UsedCarsPage() {
   }, [searchTerm, brand, priceRange, sortBy, carType]);
 
   const filteredCars = cars
+    .filter((car) => car.show_in_used_car)
     .filter((car) => {
-      if (searchTerm && !car.name?.toLowerCase().includes(searchTerm.toLowerCase())) return false;
-      if (brand !== "all" && car.brand?.toLowerCase() !== brand.toLowerCase()) return false;
-
+      if (
+        searchTerm &&
+        !car.name?.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+        return false;
+      if (brand !== "all" && car.brand?.toLowerCase() !== brand.toLowerCase())
+        return false;
+      if (year !== "all" && car.year?.toString() !== year) return false;
       if (priceRange !== "all") {
         const [min, max] = priceRange
           .split("-")
-          .map((p) => Number.parseInt(p.replace("+", "")) || Number.POSITIVE_INFINITY);
-        if (car.sale_price < min || (max !== Number.POSITIVE_INFINITY && car.sale_price > max))
+          .map(
+            (p) =>
+              Number.parseInt(p.replace("+", "")) || Number.POSITIVE_INFINITY
+          );
+        if (
+          car.sale_price < min ||
+          (max !== Number.POSITIVE_INFINITY && car.sale_price > max)
+        )
           return false;
       }
-
-      if (carType && car.type_label?.toLowerCase() !== carType.toLowerCase()) return false;
+      if (carType && car.type?.toUpperCase() !== carType) return false;
 
       return true;
     })
     .sort((a, b) => {
-      switch (sortBy) {
-        case "price-low":
-          return a.sale_price - b.sale_price;
-        case "price-high":
-          return b.sale_price - a.sale_price;
-        case "name":
-          return a.name.localeCompare(b.name);
-        default:
-          return 0;
-      }
+      if (sortBy === "price-low") return a.sale_price - b.sale_price;
+      if (sortBy === "price-high") return b.sale_price - a.sale_price;
+      if (sortBy === "name") return a.name.localeCompare(b.name);
+      if (sortBy === "newest") return b.year - a.year;
+      return 0;
     });
 
   const visibleCars = filteredCars.slice(0, displayedCars);
@@ -123,7 +129,9 @@ export default function UsedCarsPage() {
               />
             </div>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 relative z-10 text-center">
-              <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">רכבים משומשים</h1>
+              <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
+                רכבים משומשים
+              </h1>
               <p className="text-lg md:text-2xl text-white opacity-90 max-w-2xl mx-auto">
                 מצאו רכבים משומשים איכותיים במחירים מעולים עם אחריות מלאה
               </p>
@@ -135,32 +143,43 @@ export default function UsedCarsPage() {
             <Button
               variant="outline"
               className="w-full flex items-center justify-center gap-2"
-              onClick={() => setShowMobileFilters(!showMobileFilters)}>
+              onClick={() => setShowMobileFilters(!showMobileFilters)}
+            >
               <Filter className="h-4 w-4" />
               סינון וחיפוש
             </Button>
           </div>
 
           {/* Car Type Filters - Improved responsive design */}
-          <div className={`my-6 ${showMobileFilters ? "block" : "hidden md:block"}`}>
+          <div
+            className={`my-6 ${
+              showMobileFilters ? "block" : "hidden md:block"
+            }`}
+          >
             <h2 className="text-lg font-semibold mb-3 text-right">סוג רכב</h2>
             <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4">
               {carTypes.map((type) => {
                 const Icon = type.icon;
-                const isActive = carType === type.name;
+                const isActive = carType === type.value;
                 return (
                   <button
-                    key={type.name}
-                    onClick={() => setCarType(carType === type.name ? null : type.name)}
+                    key={type.value}
+                    onClick={() =>
+                      setCarType(carType === type.value ? null : type.value)
+                    }
                     className={`flex flex-col items-center justify-center p-3 sm:p-6 rounded-lg transition-all duration-200 ${
                       isActive
                         ? "bg-cyan-100 dark:bg-cyan-800 shadow-md scale-105"
                         : "bg-white dark:bg-gray-800 hover:bg-cyan-50 dark:hover:bg-cyan-900"
-                    }`}>
+                    }`}
+                  >
                     <div
                       className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center mb-2 transition-colors duration-200 ${
-                        isActive ? "bg-cyan-200 dark:bg-cyan-700" : "bg-gray-100 dark:bg-gray-700"
-                      }`}>
+                        isActive
+                          ? "bg-cyan-200 dark:bg-cyan-700"
+                          : "bg-gray-100 dark:bg-gray-700"
+                      }`}
+                    >
                       <Icon
                         className={`w-6 h-6 sm:w-7 sm:h-7 ${
                           isActive
@@ -174,7 +193,8 @@ export default function UsedCarsPage() {
                         isActive
                           ? "text-cyan-700 dark:text-cyan-300"
                           : "text-gray-700 dark:text-gray-300"
-                      }`}>
+                      }`}
+                    >
                       {type.name}
                     </span>
                   </button>
@@ -208,7 +228,8 @@ export default function UsedCarsPage() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setShowMobileFilters(false)}
-                  className="md:hidden">
+                  className="md:hidden"
+                >
                   סגור
                 </Button>
               )}
@@ -223,7 +244,8 @@ export default function UsedCarsPage() {
                 .map((_, i) => (
                   <div
                     key={i}
-                    className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow">
+                    className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow"
+                  >
                     <Skeleton className="h-48 w-full" />
                     <div className="p-4">
                       <Skeleton className="h-4 w-1/3 mb-2" />
@@ -252,7 +274,7 @@ export default function UsedCarsPage() {
                   key={car.id}
                   car={{
                     id: car.id,
-                    name: car.name || car.title || "CAR NAME",
+                    name:  car.title || "CAR NAME",
                     brand: car.brand,
                     price: car.sale_price,
                     originalPrice: car.market_price,
@@ -273,7 +295,8 @@ export default function UsedCarsPage() {
             <div className="text-center mt-8 pb-8">
               <Button
                 onClick={loadMore}
-                className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-6 rounded-lg font-medium transition-colors">
+                className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-6 rounded-lg font-medium transition-colors"
+              >
                 טען עוד רכבים
               </Button>
             </div>
@@ -289,7 +312,7 @@ export default function UsedCarsPage() {
                 לא נמצאו רכבים משומשים התואמים את הקריטריונים שלך.
               </p>
               <p className="text-gray-500 dark:text-gray-400 mt-2 max-w-md mx-auto">
-                נסה להתאים את המסננים או מונחי החיפוש כדי למצוא רכבים נוספים.
+                נסו להתאים את המסננים או מונחי החיפוש כדי למצוא רכבים נוספים.
               </p>
               <Button
                 variant="outline"
@@ -300,7 +323,8 @@ export default function UsedCarsPage() {
                   setPriceRange("all");
                   setSortBy("price-low");
                   setCarType(null);
-                }}>
+                }}
+              >
                 נקה את כל המסננים
               </Button>
             </div>
@@ -309,8 +333,14 @@ export default function UsedCarsPage() {
           {/* Error State */}
           {error && (
             <div className="text-center py-12 bg-red-50 dark:bg-red-900/20 rounded-xl">
-              <p className="text-red-600 dark:text-red-400 text-lg">שגיאה: {error}</p>
-              <Button variant="outline" className="mt-4" onClick={() => window.location.reload()}>
+              <p className="text-red-600 dark:text-red-400 text-lg">
+                שגיאה: {error}
+              </p>
+              <Button
+                variant="outline"
+                className="mt-4"
+                onClick={() => window.location.reload()}
+              >
                 נסה שוב
               </Button>
             </div>
