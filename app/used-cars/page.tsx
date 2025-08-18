@@ -47,6 +47,7 @@ export default function UsedCarsPage() {
           .from("cars")
           .select("*")
           .eq("status", "used")
+          .eq("public", true)
           .order("created_at", { ascending: false });
 
         if (error) {
@@ -70,7 +71,7 @@ export default function UsedCarsPage() {
   }, [searchTerm, brand, priceRange, sortBy, carType]);
 
   const filteredCars = cars
-    .filter((car) => car.show_in_used_car)
+    .filter((car) => car.public === true)
     .filter((car) => {
       if (
         searchTerm &&

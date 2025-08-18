@@ -187,7 +187,7 @@ function QuickLink({ href, label }: { href: string; label: string }) {
   return (
     <a 
       href={href}
-      className="px-5 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 dark:bg-white/10 dark:hover:bg-white/20 rounded-full text-white backdrop-blur-sm transition-all hover:scale-105"
+      className="px-5 py-2 bg-white bg-opacity-40 hover:bg-opacity-30 dark:bg-white/30 dark:hover:bg-white/20 rounded-full text-white backdrop-blur-sm transition-all hover:scale-105"
     >
       {label}
     </a>

@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import ContactModal from "./ContactModal";
+import { Feature } from "@/lib/types";
 
 interface CarCardProps {
   car: {
@@ -13,7 +14,7 @@ interface CarCardProps {
     sale_price: number;
     originalPrice?: number;
     images: string[];
-    features?: string[];
+    features?: Array<string | Feature>;
     isBestChoice?: boolean;
     year?: number;
     kilometers?: number;
@@ -29,13 +30,34 @@ interface CarCardProps {
 
 export default function CarCard({ car }: CarCardProps) {
   const [showContactModal, setShowContactModal] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const resolveImageUrl = (img?: string) => {
+    if (!img) return "/placeholder-car.svg";
+    if (img.startsWith("/") || img.startsWith("http")) return img;
+    return (
+      (process.env.NEXT_PUBLIC_SUPABASE_URL || "") +
+      "/storage/v1/object/public/cars/" +
+      img
+    );
+  };
+  const [imageSrc, setImageSrc] = useState<string>(resolveImageUrl(car.images?.[0]));
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const formatPrice = (price: number) => {
+    if (!mounted) return String(price);
     return new Intl.NumberFormat("he-IL", {
       style: "currency",
       currency: "ILS",
       minimumFractionDigits: 0,
     }).format(price);
+  };
+
+  const formatNumber = (value: number) => {
+    if (!mounted) return String(value);
+    return value.toLocaleString();
   };
 
   return (
@@ -44,20 +66,16 @@ export default function CarCard({ car }: CarCardProps) {
         dir="rtl"
         className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 relative max-w-md sm:max-w-lg lg:max-w-4xl w-full mx-auto border border-gray-300 dark:border-gray-700"
       >
-        {/* Header Tags */}
-        {/* تمت إزالة جميع الأوسمة */}
 
         {/* Car Image */}
         <div className="relative h-40 sm:h-48 lg:h-64 bg-gray-100 dark:bg-gray-700">
           <Image
-            src={
-              process.env.NEXT_PUBLIC_SUPABASE_URL +
-              "/storage/v1/object/public/cars/" +
-              car.images[0]
-            }
+            src={imageSrc}
             alt={car.title || "תמונת רכב"}
             fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-contain rounded-t-xl"
+            onError={() => setImageSrc("/placeholder-car.svg")}
           />
         </div>
 
@@ -68,7 +86,7 @@ export default function CarCard({ car }: CarCardProps) {
               {car.brand}
             </span>
             <span className="text-gray-500 dark:text-gray-400">
-              {car.year} | {car.kilometers?.toLocaleString()} ק&quot;מ
+              {car.year} | {car.kilometers != null ? formatNumber(car.kilometers) : undefined} ק&quot;מ
             </span>
           </div>
 
@@ -80,17 +98,25 @@ export default function CarCard({ car }: CarCardProps) {
           {/* Features */}
           {car.features && car.features.length > 0 && (
             <div className="space-y-1 mb-4 text-xs sm:text-sm">
-              {car.features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="flex items-center text-gray-600 dark:text-gray-400"
-                >
-                  <span className="text-green-500 dark:text-green-400 ml-2">
-                    ✓
-                  </span>
-                  {feature}
-                </div>
-              ))}
+              {car.features.map((feature, index) => {
+                const label =
+                  typeof feature === "string"
+                    ? feature
+                    : feature.value
+                    ? `${feature.name}: ${feature.value}`
+                    : feature.name;
+                return (
+                  <div
+                    key={index}
+                    className="flex items-center text-gray-600 dark:text-gray-400"
+                  >
+                    <span className="text-green-500 dark:text-green-400 ml-2">
+                      ✓
+                    </span>
+                    {label}
+                  </div>
+                );
+              })}
             </div>
           )}
 
@@ -112,7 +138,7 @@ export default function CarCard({ car }: CarCardProps) {
               </div>
               <div className="text-right">
                 <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  ₪{Math.round(car.sale_price / 60).toLocaleString()}
+                  ₪{formatNumber(Math.round(car.sale_price / 60))}
                 </div>
                 <div className="text-xs text-gray-500 dark:text-gray-400">
                   לחודש

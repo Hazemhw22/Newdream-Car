@@ -65,6 +65,16 @@ export default function Header() {
             </Link>
           </div>
 
+          {/* Mobile brand text */}
+          <div className="md:hidden text-lg font-bold text-gray-900 dark:text-gray-100">
+            אוטו שוקת
+          </div>
+
+          {/* Desktop brand text */}
+          <div className="hidden md:block text-lg font-bold text-gray-900 dark:text-gray-100">
+            אוטו שוקת
+          </div>
+
           {/* الموقع */}
           <div className="hidden md:flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
             <span>באר שבע , ישראל</span>

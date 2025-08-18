@@ -31,6 +31,7 @@ export default function Home() {
       const { data: allCars, error: allCarsError } = await supabase
         .from("cars")
         .select("*")
+        .eq("public", true)
         .order("created_at", { ascending: false });
 
       if (allCarsError) {

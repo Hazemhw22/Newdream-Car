@@ -52,6 +52,7 @@ export default function CarsPage() {
         const { data, error } = await supabase
           .from("cars")
           .select("*")
+          .eq("public", true)
           .order("created_at", { ascending: false })
           .returns<Car[]>();
 
@@ -89,6 +90,7 @@ export default function CarsPage() {
 
   const filteredCars = useMemo(() => {
     return cars
+      .filter((car) => car.public === true)
       .filter((car) => {
         if (
           searchTerm &&

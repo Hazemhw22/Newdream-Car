@@ -17,6 +17,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Car as CarType } from "../../lib/types";
+import { Badge } from "@/components/ui/badge";
 
 const carTypes = [
   { name: "חשמלי", value: "ELECTRIC", icon: Zap },
@@ -53,6 +54,7 @@ export default function NewCarsPage() {
           .from("cars")
           .select("*")
           .eq("status", "new")
+          .eq("public", true)
           .order("created_at", { ascending: false });
 
         if (error) {
@@ -76,6 +78,7 @@ export default function NewCarsPage() {
   }, [searchTerm, brand, priceRange, sortBy, carType]);
 
   const filteredCars = cars
+    .filter((car) => car.public === true)
     .filter((car) => {
       if (
         searchTerm &&
@@ -261,22 +264,24 @@ export default function NewCarsPage() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {visibleCars.map((car) => (
-                <CarCard
-                  key={car.id}
-                  car={{
-                    id: car.id.toString(),
-                    title: car.title || "CAR NAME",
-                    brand: car.brand,
-                    sale_price: car.sale_price,
-                    originalPrice: car.market_price,
-                    images: car.images || ["/placeholder-car.jpg"],
-                    features: car.features || [],
-                    isBestChoice: false,
-                    year: car.year,
-                    kilometers: car.kilometers,
-                    award: car.year === 2025 ? "רכב השנה" : undefined,
-                  }}
-                />
+                <div key={car.id?.toString()} className="relative">
+                  <CarCard
+                    car={{
+                      id: car.id.toString(),
+                      title: car.title || "CAR NAME",
+                      brand: car.brand,
+                      sale_price: car.sale_price,
+                      originalPrice: car.market_price,
+                      images: car.images || ["/placeholder-car.jpg"],
+                      features: car.features || [],
+                      isBestChoice: false,
+                      year: car.year,
+                      kilometers: car.kilometers,
+                      award: car.year === 2025 ? "רכב השנה" : undefined,
+                    }}
+                  />
+                  <Badge className="absolute top-3 right-3 bg-green-600 text-white">חדש</Badge>
+                </div>
               ))}
             </div>
           )}

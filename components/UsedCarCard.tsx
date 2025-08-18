@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import ContactModal from "@/components/ContactModal";
@@ -25,13 +25,34 @@ interface UsedCarCardProps {
 export default function UsedCarCard({ car }: UsedCarCardProps) {
   const [isLiked, setIsLiked] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const resolveImageUrl = (img?: string) => {
+    if (!img) return "/placeholder-car.svg";
+    if (img.startsWith("/") || img.startsWith("http")) return img;
+    return (
+      (process.env.NEXT_PUBLIC_SUPABASE_URL || "") +
+      "/storage/v1/object/public/cars/" +
+      img
+    );
+  };
+  const [imageSrc, setImageSrc] = useState<string>(resolveImageUrl(car.images?.[0]));
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const formatPrice = (price: number) => {
+    if (!mounted) return String(price);
     return new Intl.NumberFormat("he-IL", {
       style: "currency",
       currency: "ILS",
       minimumFractionDigits: 0,
     }).format(price);
+  };
+
+  const formatNumber = (value: number) => {
+    if (!mounted) return String(value);
+    return value.toLocaleString();
   };
 
   return (
@@ -55,17 +76,12 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
         {/* Car Image */}
         <div className="relative h-40 sm:h-48 lg:h-64 bg-gray-100 dark:bg-gray-700">
           <Image
-            src={
-              car.images && car.images[0]
-                ? process.env.NEXT_PUBLIC_SUPABASE_URL +
-                  "/storage/v1/object/public/cars/" +
-                  car.images[0]
-                : "/placeholder.svg"
-            }
+            src={imageSrc}
             alt={car.name}
             fill
             className="object-contain rounded-t-xl"
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            onError={() => setImageSrc("/placeholder-car.svg")}
           />
         </div>
 
@@ -76,7 +92,7 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
               {car.brand}
             </span>
             <span className="text-gray-500 dark:text-gray-400">
-              {car.year} | {car.mileage?.toLocaleString()} ק״מ
+              {car.year} | {car.mileage ? formatNumber(car.mileage) : undefined} ק״מ
             </span>
           </div>
 
@@ -118,7 +134,7 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
               </div>
               <div className="text-left">
                 <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  ₪ {Math.round(car.price / 60).toLocaleString()}
+                  ₪ {formatNumber(Math.round(car.price / 60))}
                 </div>
                 <div className="text-xs text-gray-500 dark:text-gray-400">
                   לחודש
