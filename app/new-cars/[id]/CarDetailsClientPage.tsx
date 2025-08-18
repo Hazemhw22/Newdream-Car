@@ -12,7 +12,7 @@ import CarColorPicker from "@/components/CarColorPicker";
 import { FinancingCalculator } from "@/components/FinancingCalculator";
 import CarImages from "@/components/CarImages";
 import { SellerInfoCard } from "@/components/SellerInfoCard";
-import type { Car } from "../../../lib/types";
+import type { Car, Feature } from "../../../lib/types";
 
 export default function CarDetailsClientPage({ car }: { car: Car }) {
   // عدل هنا: استخدم color وليس name/image/hex
@@ -312,15 +312,23 @@ export default function CarDetailsClientPage({ car }: { car: Car }) {
             <TabsContent value="features" className="p-4">
               <ul className="space-y-3 text-right">
                 {car.features && car.features.length > 0 ? (
-                  car.features.map((feature: string, index: number) => (
-                    <li
-                      key={index}
-                      className="flex items-center justify-end gap-3 text-sm"
-                    >
-                      <span>{feature}</span>
-                      <span className="text-green-500 text-lg">✓</span>
-                    </li>
-                  ))
+                  car.features.map((feature: string | Feature, index: number) => {
+                    const label =
+                      typeof feature === "string"
+                        ? feature
+                        : feature.value
+                        ? `${feature.name}: ${feature.value}`
+                        : feature.name;
+                    return (
+                      <li
+                        key={index}
+                        className="flex items-center justify-end gap-3 text-sm"
+                      >
+                        <span>{label}</span>
+                        <span className="text-green-500 text-lg">✓</span>
+                      </li>
+                    );
+                  })
                 ) : (
                   <div className="text-center py-4 text-gray-500">
                     אין תכונות זמינות לרכב זה
