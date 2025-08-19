@@ -5,14 +5,14 @@ import Header from "@/components/Header";
 import SearchFilters from "@/components/SearchFilters";
 import CarCard from "@/components/UsedCarCard";
 import { getSupabaseBrowserClient } from "../../lib/supabaseClient";
-import { Car, Truck, Zap, CircleDot, Filter } from "lucide-react";
+import { Car, Truck, Zap, CircleDot, Filter, CarFront } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const carTypes = [
   { name: "חשמלי", value: "ELECTRIC", icon: Zap },
-  { name: "רכב פרטי", value: "SEDAN", icon: Car },
+  { name: "רכב פרטי", value: "SEDAN", icon: CarFront },
   { name: "רכב מסחרי", value: "VAN", icon: Truck },
   { name: "רכב שטח", value: "SUV", icon: Car },
   { name: "היברידי", value: "HYBRID", icon: CircleDot },

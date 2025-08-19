@@ -19,11 +19,11 @@ import type { Car } from "@/lib/types";
 import { getSupabaseBrowserClient } from "@/lib/supabaseClient";
 
 const carTypes = [
+  { name: "חשמלי", value: "ELECTRIC", icon: Zap },
+  { name: "רכב פרטי", value: "SEDAN", icon: CarFront },
+  { name: "רכב מסחרי", value: "VAN", icon: Truck },
   { name: "רכב שטח", value: "SUV", icon: CarIcon },
   { name: "היברידי", value: "HYBRID", icon: CircleDot },
-  { name: "חשמלי", value: "ELECTRIC", icon: Zap },
-  { name: "מסחרי", value: "VAN", icon: Truck },
-  { name: "רכב פרטי", value: "SEDAN", icon: CarFront },
 ];
 
 const sortOptions = [
