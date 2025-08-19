@@ -27,7 +27,7 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
   const [showContactModal, setShowContactModal] = useState(false);
   const [mounted, setMounted] = useState(false);
   const resolveImageUrl = (img?: string) => {
-    if (!img) return "/placeholder-car.svg";
+    if (!img) return "/placeholder-car.png";
     if (img.startsWith("/") || img.startsWith("http")) return img;
     return (
       (process.env.NEXT_PUBLIC_SUPABASE_URL || "") +
@@ -81,7 +81,7 @@ export default function UsedCarCard({ car }: UsedCarCardProps) {
             fill
             className="object-contain rounded-t-xl"
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            onError={() => setImageSrc("/placeholder-car.svg")}
+            onError={() => setImageSrc("/placeholder-car.png")}
           />
         </div>
 
