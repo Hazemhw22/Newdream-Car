@@ -29,7 +29,7 @@ export default function CarTypes({ selectedType, onSelect, types = defaultCarTyp
               key={type.name}
               onClick={() => onSelect?.(type.value)}
               aria-pressed={selectedType === type.value}
-              className={`flex flex-col items-center justify-center rounded-lg p-2 min-w-[8px] md:min-w-[10px]`}
+              className={`flex flex-col items-center justify-center rounded-lg p-2 min-w-[96px] md:min-w-[112px]`}
             >
               <div className={`relative w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center mb-1 ${
                 selectedType === type.value
